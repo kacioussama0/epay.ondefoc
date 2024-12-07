@@ -30,3 +30,20 @@ section.landing-page .overlay {
     /*background-clip: text;*/
 
 }
+
+
+#accordionConditions {
+    counter-reset: conditions;
+}
+
+.accordion-item .accordion-header button {
+    font-size: 25px !important;
+    font-weight: bold;
+}
+
+.accordion-item .accordion-header button::before {
+    counter-increment: conditions;
+    content: counter(conditions) " - ";
+    margin-left: 5px;
+}
+
