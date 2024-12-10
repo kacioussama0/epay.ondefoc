@@ -23,7 +23,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link {{Request::url() == url('/products') ? 'active' : ''}}" href="#">منتجاتنا</a>
+                        <a class="nav-link {{Request::url() == url('/products') ? 'active' : ''}}" href="{{url('products')}}">منتجاتنا</a>
                     </li>
 
                     <li class="nav-item">

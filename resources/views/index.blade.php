@@ -29,7 +29,6 @@
 
     </section>
 
-
     <section class="features py-5">
 
         <div class="container py-4">
@@ -70,7 +69,7 @@
 
     </section>
 
-    <section class="bg-primary-subtle py-5">
+    <section class="bg-primary-subtle py-5" >
         <div class="container py-4">
             <h2 class="display-4 fw-bold text-center mb-3" data-aos="fade-down">شركائنا</h2>
             <p class="fs-4 text-center fw-light mb-5" data-aos="fade-right">شركاؤنا هم أساس نجاحنا، نعمل مع الأفضل لنقدم حلولاً مبتكرة بجودة عالية تلبي تطلعات عملائنا.</p>
@@ -185,7 +184,6 @@
 
         </div>
     </section>
-
 
 
 @endsection

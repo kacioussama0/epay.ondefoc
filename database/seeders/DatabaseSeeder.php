@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Category;
+use App\Models\Product;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -25,14 +26,26 @@ class DatabaseSeeder extends Seeder
 
         Category::create([
            'name' => 'دورات',
-            'slug' => 'دورات',
+            'slug' => 'formations',
             'user_id' => 1
         ]);
 
         Category::create([
             'name' => 'خدماتنا',
-            'slug' => 'خدماتنا',
+            'slug' => 'services',
             'user_id' => 1
         ]);
+
+
+        Product::create([
+            'id' => 1,
+            'name' => 'شهادة الكفاءة المهنية',
+            'slug' => 'vcae',
+            'description' => '',
+            'amount' => 16350 * 1000,
+            'category_id' => 2,
+
+        ]);
+
     }
 }
