@@ -10,9 +10,10 @@ Auth::routes();
 
 
 
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/payment',[\App\Http\Controllers\SiteController::class,'order']);
+Route::post('/payment',[\App\Http\Controllers\SiteController::class,'order']);
+Route::get('/payment/callback', [\App\Http\Controllers\SiteController::class, 'callback']);
+
 Route::get('/products',[\App\Http\Controllers\SiteController::class,'products']);
 Route::get('/products/{slug}',[\App\Http\Controllers\SiteController::class,'product']);
 Route::post('/products/{slug}',[\App\Http\Controllers\SiteController::class,'order']);

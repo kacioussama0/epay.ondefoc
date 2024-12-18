@@ -23,7 +23,7 @@
                     <div class="col-md-6 py-5">
                         <div class="d-flex align-items-center justify-content-between border-bottom pb-4 border-1 border-secondary mb-5">
                             <span class="fs-3 ">{{$product->name}}</span>
-                            <span class="text-primary fs-2 fw-bold">{{$product->amount}} دج</span>
+                            <span class="text-primary fs-2 fw-bold">{{$product->amount}}دج</span>
                         </div>
 
 
@@ -83,10 +83,7 @@
                                 </div>
 
 
-                                <div class="g-recaptcha mt-3" data-sitekey="6LeyrZMqAAAAAHxqDz3uhMH7KNcR1LItx4uFXehB"></div>
-                                @error('g-recaptcha-response')
-                                <span class="text-danger">{{$message}}</span>
-                                @enderror
+                                <div class="g-recaptcha my-3" data-sitekey="6LeyrZMqAAAAAHxqDz3uhMH7KNcR1LItx4uFXehB"></div>
 
 
                                 <button type="submit" class="btn btn-primary">

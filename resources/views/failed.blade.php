@@ -83,10 +83,7 @@
                                 </div>
 
 
-                                <div class="g-recaptcha mt-3" data-sitekey="6LeyrZMqAAAAAHxqDz3uhMH7KNcR1LItx4uFXehB"></div>
-                                @error('g-recaptcha-response')
-                                <span class="text-danger">{{$message}}</span>
-                                @enderror
+                                <div class="g-recaptcha my-3" data-sitekey="6LeyrZMqAAAAAHxqDz3uhMH7KNcR1LItx4uFXehB"></div>
 
 
                                 <button type="submit" class="btn btn-primary">
