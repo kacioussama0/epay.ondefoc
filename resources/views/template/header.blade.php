@@ -19,7 +19,7 @@
                 <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
 
                     <li class="nav-item">
-                        <a class="nav-link {{Request::url() == url('/') ? 'active' : ''}}" aria-current="page" href="#">الرئيسية</a>
+                        <a class="nav-link {{Request::url() == url('/') ? 'active' : ''}}" aria-current="page" href="{{url('/')}}">الرئيسية</a>
                     </li>
 
                     <li class="nav-item">

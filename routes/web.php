@@ -13,6 +13,8 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::post('/payment',[\App\Http\Controllers\SiteController::class,'order']);
 Route::get('/payment/callback', [\App\Http\Controllers\SiteController::class, 'callback']);
+Route::get('/payment/success', [\App\Http\Controllers\SiteController::class, 'success']);
+Route::get('/payment/failed', [\App\Http\Controllers\SiteController::class, 'failed']);
 
 Route::get('/products',[\App\Http\Controllers\SiteController::class,'products']);
 Route::get('/products/{slug}',[\App\Http\Controllers\SiteController::class,'product']);

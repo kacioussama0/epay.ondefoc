@@ -1,118 +1,132 @@
 @extends('template.app')
 
 
-@section('title','صفحة الدفع')
+@section('title','فشل الدفع')
 
 
+@section('styles')
+
+    <style>
+        .failed-checkmark {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto;
+        }
+
+        .cross-icon {
+            width: 80px;
+            height: 80px;
+            position: relative;
+            border-radius: 50%;
+            border: 4px solid #F44336;
+            box-sizing: content-box;
+        }
+
+        .icon-line {
+            height: 5px;
+            background-color: #F44336;
+            display: block;
+            border-radius: 2px;
+            position: absolute;
+            z-index: 10;
+
+            &.line-left {
+                top: 38px;
+                left: 18px;
+                width: 45px;
+                transform: rotate(45deg);
+                animation: icon-line-left 0.75s;
+            }
+
+            &.line-right {
+                top: 38px;
+                left: 18px;
+                width: 45px;
+                transform: rotate(-45deg);
+                animation: icon-line-right 0.75s;
+            }
+        }
+
+        .icon-circle {
+            top: -4px;
+            left: -4px;
+            z-index: 10;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            position: absolute;
+            box-sizing: content-box;
+            border: 4px solid rgba(244, 67, 54, 0.5);
+        }
+
+        @keyframes icon-line-left {
+            0% {
+                width: 0;
+                left: 40px;
+                top: 40px;
+            }
+            50% {
+                width: 0;
+                left: 40px;
+                top: 40px;
+            }
+            100% {
+                width: 45px;
+                left: 18px;
+                top: 38px;
+            }
+        }
+
+        @keyframes icon-line-right {
+            0% {
+                width: 0;
+                left: 40px;
+                top: 40px;
+            }
+            50% {
+                width: 0;
+                left: 40px;
+                top: 40px;
+            }
+            100% {
+                width: 45px;
+                left: 18px;
+                top: 38px;
+            }
+        }
+    </style>
+
+
+@endsection
 
 @section('content')
 
-    <x-page-title>صفحة الدفع</x-page-title>
-    <section class="payment-content">
+    <section class="payment-success">
 
-        <div class="container">
+        <div class="container my-5 py-5">
 
-
-
-                <div class="row g-5">
-
-                    <div class="col-md-6  d-flex justify-content-center align-items-center  py-5 ">
-                        <img src="{{asset('images/Cartes_paiments.png')}}" alt="illustration payment" class="img-fluid">
-                    </div>
-
-                    <div class="col-md-6 py-5">
-                        <div class="d-flex align-items-center justify-content-between border-bottom pb-4 border-1 border-secondary mb-5">
-                            <span class="fs-3 ">{{$product->name}}</span>
-                            <span class="text-primary fs-2 fw-bold">{{$product->amount}} دج</span>
-                        </div>
-
-
-
-                        <h3 class="mb-3">تفاصيل الزبون</h3>
-
-                        <form action="" class="mb-5" method="POST">
-
-                            @csrf
-
-
-                            <div class="row g-3">
-
-                                <div class="col-md-6">
-                                    <label for="full_name">الإسم واللقب</label>
-                                    <input type="text" class="form-control" name="customer_name" value="{{old('customer_name')}}">
-                                    @error('customer_name')
-                                    <span class="text-danger">{{$message}}</span>
-                                    @enderror
-                                </div>
-
-                                <div class="col-md-6">
-                                    <label for="full_name">الشركة (إختياري)</label>
-                                    <input type="text" class="form-control"  name="customer_enterprise" value="{{old('customer_enterprise')}}">
-                                    @error('customer_enterprise')
-                                        <span class="text-danger">{{$message}}</span>
-                                    @enderror
-                                </div>
-
-
-                                <div class="col-md-6">
-                                    <label for="email">البريد الإلكتروني</label>
-                                    <input type="text" class="form-control" name="email" value="{{old('email')}}">
-                                    @error('email')
-                                    <span class="text-danger">{{$message}}</span>
-                                    @enderror
-                                </div>
-
-
-                                <div class="col-md-6">
-
-                                    <label for="full_name">رقم الهاتف</label>
-                                    <input type="text" name="phone" class="form-control" value="{{old('phone')}}">
-                                    @error('phone')
-                                    <span class="text-danger">{{$message}}</span>
-                                    @enderror
-
-                                </div>
-
-
-                                <div class="col-md-12">
-                                    <input type="checkbox" name="agreed" id="agreed" class="form-check-input" value="1" @checked(old("agreed"))>
-                                    <label for="agreed" class="ms-1"> لقد قرأتُ <a href="{{url('/conditions')}}">الشروط والأحكام</a> وأوافق عليها لهذا الموقع <span class="text-danger">*</span></label>
-                                    @error('agreed')
-                                    <div class="text-danger">{{$message}}</div>
-                                    @enderror
-                                </div>
-
-
-                                <div class="g-recaptcha my-3" data-sitekey="6LeyrZMqAAAAAHxqDz3uhMH7KNcR1LItx4uFXehB"></div>
-
-
-                                <button type="submit" class="btn btn-primary">
-                                    <img src="{{asset('images/cib.svg')}}" alt="CIB" width="30" class="ms-1">
-                                    <img src="{{asset('images/AlgeriePoste.svg')}}" alt="Edahabia" width="30" class="me-3">
-                                    تأكيد الدفع
-                                </button>
-
-                            </div>
-
-
-                        </form>
-
-
-                        <div class="satim d-flex flex-column align-items-center">
-
-                            <h5 class="fw-bold mb-3">في حال واجهتم مشكلة في الدفع SATIM</h5>
-                            <img src="{{asset('images/numero-vert-satim.png')}}" class="w-50" alt="satim-green-number">
-
-
-                        </div>
-
-
-                    </div>
-
+            <div class="failed-checkmark">
+                <div class="cross-icon">
+                    <span class="icon-line line-left"></span>
+                    <span class="icon-line line-right"></span>
+                    <div class="icon-circle"></div>
                 </div>
+            </div>
 
+            <h1 class="fw-bolder text-danger my-5 display-3 text-center">{{$order->description}}</h1>
+
+
+            <div class="satim d-flex flex-column align-items-center my-5">
+
+                <h5 class="fw-bold mb-3">في حال واجهتم مشكلة في الدفع SATIM</h5>
+                <img src="{{asset('images/numero-vert-satim.png')}}" class="w-25" alt="satim-green-number">
 
             </div>
+
+
+        </div>
+
+
 
 
     </section>

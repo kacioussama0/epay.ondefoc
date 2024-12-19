@@ -14,6 +14,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     @include('template.styles')
     @yield('meta')
+    @yield('styles')
 </head>
 <body>
 

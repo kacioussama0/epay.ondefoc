@@ -21,11 +21,11 @@ return new class extends Migration
             $table->foreign('product_id')->references('id')
                 ->on('products')->onDelete('restrict')->onDelete('restrict');
             $table->string('transaction_id')->unique();
+            $table->text('description')->nullable();
             $table->string('authorization_number')->nullable();
             $table->string('orderNumber')->nullable();
-            $table->string('orderNumber')->nullable();
-            $table->decimal('amount', 15, 2); // Order amount
-            $table->ipAddress('ip');
+            $table->decimal('amount', 15, 2)->nullable(); // Order amount
+            $table->ipAddress('ip')->nullable();
             $table->enum('status',['Pending','Paid','Canceled'])->default('Pending');
             $table->timestamps();
         });

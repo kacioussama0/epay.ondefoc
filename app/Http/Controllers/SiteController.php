@@ -10,6 +10,34 @@ use Illuminate\Support\Facades\URL;
 
 class   SiteController extends Controller
 {
+
+
+    public function failed(Request $request) {
+
+        $orderId = $request->session()->get('tId');
+
+        if(!empty($orderId)) {
+            $order = Order::where('transaction_id',$orderId)->where('status',"Canceled")->first();
+            if(empty($order)) abort(404);
+            return view('failed',compact('order'));
+        }
+        return redirect()->to("/");
+
+    }
+    public function success(Request $request)
+    {
+        $orderId = $request->session()->get('tId');
+
+        if(!empty($orderId)) {
+            $order = Order::where('transaction_id',$orderId)->where('status',"Paid")->first();
+            if(empty($order)) abort(404);
+            return view('success',compact('order'));
+        }
+
+        return redirect()->to("/");
+
+    }
+
    public function home()
    {
        return view('index');
@@ -19,6 +47,7 @@ class   SiteController extends Controller
    {
        return view('conditions');
    }
+
 
 
     function verifyRecaptcha($responseKey, $userIP)
@@ -63,7 +92,6 @@ class   SiteController extends Controller
        ]);
 
 
-
        $satimInfo = [
            "id" => "E010901344",
            "username" => "SAT241126025",
@@ -83,18 +111,6 @@ class   SiteController extends Controller
 
 
        $satimInfo["jsonParams"] = json_encode($jsonParams);
-
-
-       $errorCode = [
-           0 =>	"لقد تمك قبول طلبك",
-           1 =>	"رقم الطلب غير معروف",
-           2 =>	"تم قبول الطلب بالفعل",
-           3 =>	"تم رفض المعاملة",
-           5 =>	"تم رفض المعاملة",
-           6 =>	"رقم الطلب غير معروف",
-           7 =>	"حصل مشكل ما"
-       ];
-
 
        $orderId = hexdec(uniqid());
 
@@ -135,12 +151,14 @@ class   SiteController extends Controller
     {
         $orderId = $request->query('orderId');
 
-        return $this->confirmOrder($orderId);
+        $this->confirmOrder($request,$orderId);
     }
 
 
-    public function confirmOrder($orderId)
+    public function confirmOrder(Request $request,$orderId)
     {
+        $userIP = $_SERVER['REMOTE_ADDR'];
+
         $response = Http::get('https://test.satim.dz/payment/rest/confirmOrder.do', [
             'orderId' => $orderId,
             'userName'=> "SAT241126025",
@@ -151,21 +169,49 @@ class   SiteController extends Controller
         if($response->successful()) {
 
             $result = $response->json();
+            $order = Order::where('transaction_id',$orderId)->first();
+            $request->session()->flash('tId', $orderId);
 
+            if(isset($order)) {
 
-            if($result['ErrorCode'] == 0) {
-                $order = Order::where('transaction_id',$orderId)->first();
+                if(($result['ErrorCode'] == 0) && ($result['OrderStatus'] == 2) && ($result['params']['respCode'] == 00)) {
 
-                if($order->exists()) {
                     $order->status = 'Paid';
-                    $order->save();
-                }else {
-                    abort(404);
+                    $order->orderNumber = $result['OrderNumber'];
+                    $order->amount = $result['Amount'];
+                    $order->ip = $result['Ip'];
+                    $order->authorization_number = $result['approvalCode'];
+                    $order->description = $result['params']['respCode_desc'];
+
+                    if($order->save()) {
+                        return redirect()->to('/payment/success')->send();
+                    }
+
                 }
+
+                elseif(($result['ErrorCode'] == 0) && ($result['OrderStatus'] == 3) && ($result['params']['respCode'] == 00)) {
+
+                    $order->status = 'Canceled';
+                    $order->orderNumber = $result['OrderNumber'];
+                    $order->ip = $userIP;
+                    $order->description = "تم رفض معاملتك";
+
+
+                }else {
+                    $order->status = 'Canceled';
+                    $order->orderNumber = $result['OrderNumber'];
+                    $order->ip = $userIP;
+                    $order->description = $result['params']['respCode_desc'] ?? $result['actionCodeDescription'];
+
+                }
+
+                if($order->save()) {
+                    return redirect()->to('/payment/failed')->send();
+                }
+
 
             }
 
-            dd($result);
         }
 
         abort(500);
