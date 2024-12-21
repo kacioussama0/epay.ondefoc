@@ -19,3 +19,5 @@ Route::get('/payment/failed', [\App\Http\Controllers\SiteController::class, 'fai
 Route::get('/products',[\App\Http\Controllers\SiteController::class,'products']);
 Route::get('/products/{slug}',[\App\Http\Controllers\SiteController::class,'product']);
 Route::post('/products/{slug}',[\App\Http\Controllers\SiteController::class,'order']);
+
+Route::resource('/orders',\App\Http\Controllers\OrderController::class);

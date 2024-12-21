@@ -12,7 +12,10 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        $orders = Order::select('id','customer_name','email','phone','product_id','transaction_id','created_at', 'status')->orderBy('created_at',"DESC")->get()->toArray();
+
+
+        return view('orders.index',compact('orders'));
     }
 
     /**

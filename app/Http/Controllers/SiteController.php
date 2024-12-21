@@ -127,6 +127,7 @@ class   SiteController extends Controller
            "amount" => $satimInfo['amount'],
            "currency" => $satimInfo['currency'],
            "returnUrl" => $satimInfo['return_url'],
+           "failUrl" => $satimInfo['return_url'],
            "language" => $satimInfo['language'],
            "jsonParams" => $satimInfo['jsonParams']
        ]);
