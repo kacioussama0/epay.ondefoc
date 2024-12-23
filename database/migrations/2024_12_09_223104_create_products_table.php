@@ -11,20 +11,24 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('products', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('slug')->unique();
-            $table->string('image')->nullable();
-            $table->text('description')->nullable();
-            $table->decimal('price', 10, 2);
-            $table->decimal('sale_price', 10, 2)->nullable();
-            $table->unsignedBigInteger('category_id');
-            $table->boolean('is_active')->default(true);
-            $table->foreign('category_id')->references('id')
-                ->on('categories')->onDelete('cascade')->onDelete('cascade');
-            $table->timestamps();
-        });
+            Schema::create('products', function (Blueprint $table) {
+                $table->id();
+                $table->string('name');
+                $table->string('slug')->unique();
+                $table->string('sku')->unique()->nullable();
+                $table->string('image')->nullable();
+                $table->text('description')->nullable();
+                $table->unsignedInteger('stock')->nullable();
+                $table->decimal('tax_rate', 5, 2)->nullable();
+                $table->decimal('price', 10, 2);
+                $table->decimal('sale_price', 10, 2)->nullable();
+                $table->unsignedBigInteger('category_id');
+                $table->enum('status', ['draft', 'published', 'archived'])->default('draft');
+                $table->foreign('category_id')->references('id')
+                    ->on('categories')->onDelete('cascade')->onDelete('cascade');
+                $table->timestamps();
+                $table->softDeletes();
+            });
     }
 
     /**

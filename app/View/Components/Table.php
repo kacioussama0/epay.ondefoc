@@ -9,16 +9,16 @@ class Table extends Component
     public $headers;
     public $rows;
 
-    /**
-     * Create a new component instance.
-     *
-     * @param array $headers
-     * @param array $rows
-     */
-    public function __construct(array $headers, array $rows)
+    public $hasActions;
+    public $actions;
+
+    public function __construct(array $headers, array $rows, $actions = null)
     {
         $this->headers = $headers;
         $this->rows = $rows;
+        $this->hasActions = $actions !== null;
+        $this->actions = $actions;
+
     }
 
     /**

@@ -41,8 +41,9 @@ class DatabaseSeeder extends Seeder
             'id' => 1,
             'name' => 'شهادة الكفاءة المهنية',
             'slug' => 'vcae',
+            'sku'  => 'VCAE001',
             'description' => '',
-            'amount' => 16350 * 1000,
+            'price' => 16350,
             'category_id' => 2,
 
         ]);

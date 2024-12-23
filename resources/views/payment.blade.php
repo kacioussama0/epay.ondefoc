@@ -13,7 +13,6 @@
         <div class="container">
 
 
-
                 <div class="row g-5">
 
                     <div class="col-md-6  d-flex justify-content-center align-items-center  py-5 ">
@@ -23,14 +22,16 @@
                     <div class="col-md-6 py-5">
                         <div class="d-flex align-items-center justify-content-between border-bottom pb-4 border-1 border-secondary mb-5">
                             <span class="fs-3 ">{{$product->name}}</span>
-                            <span class="text-primary fs-2 fw-bold">{{$product->amount}} دج</span>
+                            <span class="text-primary fs-2 fw-bold">{{$product->price}} دج</span>
                         </div>
 
+                        <p class="my-3">{{$product->description}}</p>
 
 
-                        <h3 class="mb-3">تفاصيل الزبون</h3>
 
-                        <form action="" class="mb-5" method="POST">
+                        <h3 class="my-3">تفاصيل الزبون</h3>
+
+                        <form action="{{route('payment',$product->slug)}}" class="mb-5" method="POST">
 
                             @csrf
 

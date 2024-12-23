@@ -161,6 +161,21 @@
                 top: 38px;
             }
         }
+
+        @media print {
+
+            .success-checkmark,button,header,footer,.btn-group {
+                display: none !important;
+            }
+
+            #logo-print {
+                display: block !important;
+            }
+
+
+        }
+
+
     </style>
 
 @endsection
@@ -171,7 +186,11 @@
 
         <div class="container my-5 py-5">
 
-                        <div class="success-checkmark">
+
+            <img src="https://ondefoc.dz/wp-content/uploads/2023/10/LOGO-ONDEFOC-1-1.png.webp" id="logo-print" class="d-none mx-auto mb-5" alt="logo-ondefoc" height="100">
+
+
+            <div class="success-checkmark">
                             <div class="check-icon">
                                 <span class="icon-line line-tip"></span>
                                 <span class="icon-line line-long"></span>
@@ -182,8 +201,12 @@
 
                         <h1 class="fw-bolder text-success mb-5 display-2 d-flex justify-content-center align-items-center">{{$order->description}}</h1>
 
+
                         <div class="card shadow border-0 my-5 p-3">
                             <div class="card-body">
+
+                                <x-alert/>
+
                                 <table class="table table-bordered">
 
                                     <tr>
@@ -209,7 +232,7 @@
                                     </tr>
                                     <tr>
                                         <td>الإجمالي</td>
-                                        <td>{{$order->amount}} دينار جزائري </td>
+                                        <td>{{$order->amount / 100}} دينار جزائري </td>
                                     </tr>
                                     <tr>
                                         <td>وسيلة الدفع</td>
@@ -221,11 +244,25 @@
                         </div>
 
 
-            <div class="send">
-                <button onclick="window.print()" class="btn-outline-primary">
-                    <i class="bi bi-printer-fill ms-2l"></i> طباعة
+
+
+            <div class="btn-group d-flex justify-content-center align-items-center" role="group" aria-label="reciept-send-methods">
+
+                <a href="{{url('/receipt/' . $order->transaction_id)}}" class="btn btn-danger">
+                    <i class="bi bi-file-pdf-fill ms-2"></i> PDF
+                </a>
+
+                <button type="button" class="btn btn-success" onclick="window.print()" >
+                    <i class="bi bi-printer-fill ms-2"></i> طباعة
                 </button>
+
+                <a href="{{url('/receipt/' . $order->transaction_id . '/email')}}" class="btn btn-warning">
+                    <i class="bi bi-envelope-fill ms-2"></i> بريد
+                </a>
+
+
             </div>
+
 
             <div class="satim d-flex flex-column align-items-center my-5">
 

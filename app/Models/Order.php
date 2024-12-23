@@ -28,11 +28,6 @@ class Order extends Model
         return "#$value";
     }
 
-    public function getProductIdAttribute($value)
-    {
-        return Product::find($value)->first()->name;
-
-    }
 
     public function getCreatedAtAttribute($value)
     {

@@ -72,9 +72,14 @@ class   SiteController extends Controller
         return false;
     }
 
-   public function order(Request $request)
+   public function order(Request $request,$slug)
    {
        $userIP = $_SERVER['REMOTE_ADDR'];
+
+       $product = Product::where('slug',$slug)->first();
+
+       if(empty($product)) abort(404);
+
 
        $validatedData =  $request->validate([
            'customer_name' => 'required|max:128',
@@ -100,7 +105,7 @@ class   SiteController extends Controller
            "confirm_url" => "https://test.satim.dz/payment/rest/confirmOrder.do",
            "refund_url" => "	https://test.satim.dz/payment/rest/refund.do",
            "currency" => "012",
-           "amount" => "139139",
+           "amount" => $product->price * 100,
            "language" => "AR",
            "return_url" => url('/payment/callback'),
        ];
@@ -135,7 +140,7 @@ class   SiteController extends Controller
        if ($response->successful()) {
            $validatedData['transaction_id'] = str_replace('mdOrder=','',parse_url($response->json()['formUrl'], PHP_URL_QUERY));
            $validatedData['orderNumber'] = $orderId;
-           $validatedData['product_id'] = 1;
+           $validatedData['product_id'] = $product->id;
 
            if(Order::create($validatedData)) {
                return redirect()->to($response->json()['formUrl']);
@@ -171,7 +176,7 @@ class   SiteController extends Controller
 
             $result = $response->json();
             $order = Order::where('transaction_id',$orderId)->first();
-            $request->session()->flash('tId', $orderId);
+            $request->session()->put('tId', $orderId);
 
             if(isset($order)) {
 
@@ -222,7 +227,7 @@ class   SiteController extends Controller
 
     public function products()
    {
-       $products = Product::all();
+       $products = Product::where('status','published')->orderBy('created_at','DESC')->get();
 
        return  view('products',compact('products'));
 
@@ -230,8 +235,8 @@ class   SiteController extends Controller
 
    public function product($slug)
    {
-        $product = Product::where('slug',$slug)->first();
-        if(!$product->exists()) abort(404);
+        $product = Product::where('slug',$slug)->where('status','published')->first();
+        if(empty($product)) abort(404);
 
        return view('payment',compact('product'));
    }

@@ -8,16 +8,23 @@ Route::get('/conditions',[\App\Http\Controllers\SiteController::class,'condition
 
 Auth::routes();
 
+Route::get('/receipt/{orderId}', [\App\Http\Controllers\OrderController::class, 'generateReceipt']);
+Route::get('/receipt/{orderId}/email', [\App\Http\Controllers\OrderController::class, 'sendReceipt']);
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::post('/payment',[\App\Http\Controllers\SiteController::class,'order']);
 Route::get('/payment/callback', [\App\Http\Controllers\SiteController::class, 'callback']);
 Route::get('/payment/success', [\App\Http\Controllers\SiteController::class, 'success']);
 Route::get('/payment/failed', [\App\Http\Controllers\SiteController::class, 'failed']);
 
 Route::get('/products',[\App\Http\Controllers\SiteController::class,'products']);
 Route::get('/products/{slug}',[\App\Http\Controllers\SiteController::class,'product']);
-Route::post('/products/{slug}',[\App\Http\Controllers\SiteController::class,'order']);
+Route::post('/products/{slug}/payment',[\App\Http\Controllers\SiteController::class,'order'])->name('payment');
 
-Route::resource('/orders',\App\Http\Controllers\OrderController::class);
+Route::prefix('admin')->group(function(){
+    Route::resource('/orders',\App\Http\Controllers\OrderController::class);
+    Route::resource('/products', \App\Http\Controllers\ProductController::class);
+});
+
+
+

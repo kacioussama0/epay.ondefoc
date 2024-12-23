@@ -14,11 +14,11 @@
         <div class="container">
 
 
-            <div class="row">
+            <div class="row g-4">
 
                 @foreach($products as $product)
 
-                    <div class="col-md-4">
+                    <div class="col-md-6 col-lg-4">
                         <div class="card text-center rounded-4 border-0 shadow p-4">
                             <div class="card-body">
 
@@ -26,8 +26,8 @@
 
                                 <h3 class="card-title text-truncate">{{$product->name}}</h3>
                                 <h6 class="card-subtitle mb-2 badge bg-dark">{{$product->category->name}}</h6>
-                                <p class="card-text">{{$product->description}}</p>
-                                <span class="text-success mb-5 fs-3 fw-bold">{{$product->amount}} د.ج </span>
+                                <br>
+                                <span class="text-success mb-5 fs-3 fw-bold">{{$product->price}} د.ج </span>
 
                                 <br>
                                 <br>
