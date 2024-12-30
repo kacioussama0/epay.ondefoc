@@ -1,7 +1,7 @@
 @extends('template.app')
 
 
-@section('title','الرئيسية')
+@section('title','الدفع الإلكتروني')
 
 
 @section('content')

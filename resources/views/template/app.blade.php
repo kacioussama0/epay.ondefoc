@@ -7,16 +7,37 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="msapplication-TileImage" content="https://ondefoc.dz/wp-content/uploads/2023/12/cropped-LOGO-ONDEFOC-2-270x270.png">
     <title>@yield('title') | {{config('app.name')}}</title>
+    <meta name="description" content="استفد من منصة الدفع الإلكتروني المتوفرة على موقع الديوان الوطني للتكوين المتواصل. ادفع بأمان باستخدام بطاقتك البنكية أو بطاقة أحد أقاربك، مع خدمة متاحة على مدار الساعة لضمان معالجة سريعة لملفك.">
+    <meta name="keywords" content="Ondefoc, VCAE, Epay,Epaiment">
+    <meta name="author" content="Ondefoc">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="{{url('/')}}">
+
     <link rel="icon" href="https://ondefoc.dz/wp-content/uploads/2023/12/cropped-LOGO-ONDEFOC-2-32x32.png" sizes="32x32">
     <link rel="icon" href="https://ondefoc.dz/wp-content/uploads/2023/12/cropped-LOGO-ONDEFOC-2-192x192.png" sizes="192x192">
     <link rel="apple-touch-icon" href="https://ondefoc.dz/wp-content/uploads/2023/12/cropped-LOGO-ONDEFOC-2-180x180.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <meta property="og:title" content="@yield('title') | {{config('app.name')}}">
+    <meta property="og:description" content="استفد من منصة الدفع الإلكتروني المتوفرة على موقع الديوان الوطني للتكوين المتواصل. ادفع بأمان باستخدام بطاقتك البنكية أو بطاقة أحد أقاربك، مع خدمة متاحة على مدار الساعة لضمان معالجة سريعة لملفك.">
+    <meta property="og:image" content="{{asset('images/logo-colored.png')}}">
+    <meta property="og:url" content="{{url('/')}}">
+    <meta property="og:type" content="website">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="@yield('title') | {{config('app.name')}}">
+    <meta name="twitter:description" content="استفد من منصة الدفع الإلكتروني المتوفرة على موقع الديوان الوطني للتكوين المتواصل. ادفع بأمان باستخدام بطاقتك البنكية أو بطاقة أحد أقاربك، مع خدمة متاحة على مدار الساعة لضمان معالجة سريعة لملفك.">
+    <meta name="twitter:image" content="{{asset('images/logo-colored.png')}}">
+
+
     @include('template.styles')
     @yield('meta')
     @yield('styles')
 </head>
 <body>
+
+    <x-loader/>
 
     @include('template.header')
 
