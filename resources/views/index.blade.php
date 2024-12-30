@@ -33,13 +33,13 @@
 
         <div class="container py-4">
 
-            <h3 class="display-4 fw-bold text-center mb-3" data-aos="fade-right">قم بإجراء مدفوعاتك على موقعنا بسهولة وأمان.</h3>
-            <p class="fs-4 text-center fw-light mb-5" data-aos="fade-right">لا ترغب في التنقل لدفع مستحقات الدورات أو الشهادات ؟ اكتشف هنا جميع الخطوات التي يجب اتباعها لإجراء المدفوعات عبر الإنترنت باستخدام بطاقة CIB أو الذهبية لبريد الجزائر.</p>
+            <h3 class="display-4 fw-bold text-center mb-3" >قم بإجراء مدفوعاتك على موقعنا بسهولة وأمان.</h3>
+            <p class="fs-4 text-center fw-light mb-5" >لا ترغب في التنقل لدفع مستحقات الدورات أو الشهادات ؟ اكتشف هنا جميع الخطوات التي يجب اتباعها لإجراء المدفوعات عبر الإنترنت باستخدام بطاقة CIB أو الذهبية لبريد الجزائر.</p>
 
 
             <div class="row">
 
-                <div class="col-md-4" data-aos="fade-right">
+                <div class="col-md-4">
                     <img src="{{asset('images/online-cart.svg')}}" alt="" class="img-fluid mb-3">
                     <div class="d-flex align-items-center justify-content-center fw-bolder">
                         <span class="rounded-circle bg-primary text-light  fs-4 d-flex align-items-center justify-content-center text-center me-2" style="width: 40px;height: 40px">1</span>
@@ -47,7 +47,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-4" data-aos="fade-down">
+                <div class="col-md-4" >
                     <img src="{{asset('images/user-card.svg')}}" alt="" class="img-fluid mb-3">
                     <div class="d-flex align-items-center justify-content-center fw-bolder">
                         <span class="rounded-circle bg-primary text-light  fs-4 d-flex align-items-center justify-content-center text-center me-2" style="width: 40px;height: 40px">2</span>
@@ -55,7 +55,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-4" data-aos="fade-left">
+                <div class="col-md-4" >
                     <img src="{{asset('images/recu-enline.svg')}}" alt="" class="img-fluid mb-3">
                     <div class="d-flex align-items-center justify-content-center fw-bolder">
                         <span class="rounded-circle bg-primary text-light  fs-4 d-flex align-items-center justify-content-center text-center me-2" style="width: 40px;height: 40px">3</span>
@@ -72,9 +72,9 @@
     <section class="bg-primary-subtle py-5" >
         <div class="container py-4">
             <h2 class="display-4 fw-bold text-center mb-3" data-aos="fade-down">شركائنا</h2>
-            <p class="fs-4 text-center fw-light mb-5" data-aos="fade-right">شركاؤنا هم أساس نجاحنا، نعمل مع الأفضل لنقدم حلولاً مبتكرة بجودة عالية تلبي تطلعات عملائنا.</p>
+            <p class="fs-4 text-center fw-light mb-5" data-aos="fade-up">شركاؤنا هم أساس نجاحنا، نعمل مع الأفضل لنقدم حلولاً مبتكرة بجودة عالية تلبي تطلعات عملائنا.</p>
 
-            <div class="row g-3 my-5" data-aos="fade-up">
+            <div class="row gx-md-3 gy-3 my-5" data-aos="fade-up">
 
 
                 <div class="col-lg-2 col-md-3 col-sm-6 col-12">
@@ -185,6 +185,27 @@
         </div>
     </section>
 
+    <script>
+
+        const navBar = document.querySelector('nav');
+        const navBarBtn = document.querySelector('nav .btn');
+
+        window.onscroll = ()=> {
+
+            if(this.scrollY >= 1290) {
+                navBar.classList.add('text-bg-primary');
+                navBarBtn.classList.add('btn-light');
+                navBarBtn.classList.remove('btn-primary');
+                navBar.classList.remove('bg-transparent');
+            }else {
+                navBar.classList.add('bg-transparent');
+                navBar.classList.remove('text-bg-primary');
+                navBarBtn.classList.remove('btn-light');
+                navBarBtn.classList.add('btn-primary');
+            }
+        }
+
+    </script>
 
 @endsection
 

@@ -8,7 +8,17 @@ header {
     z-index: 100;
 }
 
+header nav {
+    transition: .3s;
+}
 
+header nav .navbar-toggler {
+    border: none;
+}
+
+header nav .btn {
+    display: none;
+}
 
 section.landing-page .overlay {
     width: 100%;

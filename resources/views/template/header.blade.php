@@ -1,18 +1,14 @@
-<header class="shadow-sm position-{{Request::url() == url('/') ? 'fixed' : 'sticky'}}  w-100 top-0 z-4">
+<header class="{{Request::url() == url('/') ? 'shadow-sm ' : ''}} position-{{Request::url() == url('/') ? 'fixed' : 'sticky'}}  w-100 top-0 z-4 ">
 
-    <nav class="navbar navbar-expand-lg {{Request::url() == url('/') ? "navbar-dark bg-transparent" : ""}}">
+    <nav class="navbar navbar-expand-lg navbar-dark {{Request::url() == url('/') ? " bg-transparent" : "bg-primary"}}">
         <div class="container">
             <a class="navbar-brand" href="{{url('/')}}">
 
-                @if(Request::url() == url('/'))
                     <img src="https://cdn.ondefoc.dz/wp-content/uploads/2023/10/Capture_d_ecran_2023-10-18_003858-removebg-preview-1-300x73.png" alt="logo-ondefoc" height="65">
-                @else
-                    <img src="https://ondefoc.dz/wp-content/uploads/2023/10/LOGO-ONDEFOC-1-1.png.webp" alt="logo-ondefoc" height="65">
-                @endif
 
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+                <span class="bi bi-three-dots-vertical"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
@@ -34,16 +30,38 @@
                         <a class="nav-link {{Request::url() == url('/') ? '/contact-us' : ''}}" href="#">إتصل بنا</a>
                     </li>
 
+
+                    @auth
+
+
+
+
+
+                    @endauth
+
                 </ul>
 
 
                 @auth
+
+                    <div class="dropdown">
+                        <a class="nav-link text-light dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            لوحة التحكم
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{{route('categories.index')}}">التصنيفات <i class="bi bi-bookmarks-fill"></i></a></li>
+                            <li><a class="dropdown-item" href="{{route('products.index')}}">المنتجات</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="{{route('orders.index')}}">الطلبات</a></li>
+                        </ul>
+                    </div>
+
                     <form action="{{url('/logout')}}" method="post" onsubmit="return confirm('هل أنت متأكد ?')">
                         @csrf
-                        <input type="submit" value="خروج" class="btn btn-primary rounded-pill px-5 py-2">
+                        <input type="submit" value="خروج" class="btn btn-light ms-3 rounded-pill px-5 py-2">
                     </form>
                 @else
-                    <a href="{{url('/login')}}" class="btn btn-primary rounded-pill px-5 py-2">دخول</a>
+                    <a href="{{url('/login')}}" class="btn btn-primary  rounded-pill px-5 py-2">دخول</a>
                 @endif
 
             </div>

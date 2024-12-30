@@ -146,7 +146,6 @@ class   SiteController extends Controller
     public function callback(Request $request)
     {
         $orderId = $request->query('orderId');
-
         $this->confirmOrder($request,$orderId);
     }
 

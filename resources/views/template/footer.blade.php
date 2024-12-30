@@ -2,7 +2,7 @@
 
     <div class="container">
 
-        <div class="row g-4 gx-5">
+        <div class="row g-4 gx-md-5">
 
 
             <div class="col-md-4" >
@@ -32,25 +32,23 @@
 
             </div>
 
-            <div class="col-md-12 mt-5 " >
+            <div class="col-md-12 mt-5">
 
                 <div class="row">
 
                     <div class="col-md-6">
 
-                        <div class="social-media hstack gap-3">
-
+                        <div class="social-media hstack justify-content-center justify-content-md-start mb-3 mb-md-0 gap-3">
                             <a href="#" class="text-light text-decoration-none fs-4"><i class="bi bi-facebook"></i></a>
                             <a href="#" class="text-light text-decoration-none fs-4"><i class="bi bi-youtube"></i></a>
                             <a href="#" class="text-light text-decoration-none fs-4"><i class="bi bi-twitter-x"></i></a>
                             <a href="#" class="text-light text-decoration-none fs-4"><i class="bi bi-linkedin"></i></a>
                             <a href="#" class="text-light text-decoration-none fs-4"><i class="bi bi-instagram"></i></a>
-
                         </div>
 
                     </div>
 
-                    <div class="col-md-6 text-end">
+                    <div class="col-md-6 text-start text-md-end ">
                         <p class="mb-0">كل الحقوق محفوظة الديوان الوطني لتطوير التكوين المتواصل و ترقيته &copy; {{date("Y")}}</p>
                     </div>
 

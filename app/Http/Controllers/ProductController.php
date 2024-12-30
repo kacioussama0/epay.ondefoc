@@ -15,18 +15,17 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::select('id','name','sku','image','stock','price','category_id','created_at')->orderBy('created_at',"DESC")->get();
+        $products = Product::select('name','sku','image','stock','price','category_id','created_at')->orderBy('created_at',"DESC")->get();
 
-        $headers = ['#','الإسم','SKU','الصورة','المخزون','السعر','التصنيف','التاريخ'];
+        $headers = ['الصورة','الإسم','SKU','المخزون','السعر','التصنيف','التاريخ'];
 
         $rows = $products->map(function ($product) {
             return [
-                $product['id'],
+                "<img src='" . ($product['image'] ? asset('storage/' . $product['image']) : "https://ondefoc.dz/wp-content/uploads/2023/10/LOGO-ONDEFOC-1-1.png.webp" ). "' alt='{$product['name']}' width='80'>",
                 $product['name'],
                 $product['sku'],
-                "<img src='" . ($product['image'] ? asset('storage/' . $product['image']) : "https://ondefoc.dz/wp-content/uploads/2023/10/LOGO-ONDEFOC-1-1.png.webp" ). "' alt='{$product['name']}' width='80'>",
                 $product['stock'] ? $product['stock'] : 'متوفر',
-                $product['price'] . ' د.ج',
+                ((!empty($product['sale_price'])) ?  $product['sale_price']  : $product['price'])  .  ' د.ج',
                 $product['category']['name'],
                 $product['created_at']
             ];
@@ -80,7 +79,7 @@ class ProductController extends Controller
             'status' => 'required|in:draft,published,archived',
         ]);
 
-        $validatedData['slug'] = \Illuminate\Support\Str::slug($validatedData['name']);
+        if(empty($validatedData['slug']))  $validatedData['slug'] = \Illuminate\Support\Str::slug($validatedData['name']);
 
 
         if($request->hasFile('image')){
@@ -140,7 +139,7 @@ class ProductController extends Controller
             'status' => 'required|in:draft,published,archived',
         ]);
 
-        $validatedData['slug'] = \Illuminate\Support\Str::slug($validatedData['name']);
+        if(empty($validatedData['slug']))  $validatedData['slug'] = \Illuminate\Support\Str::slug($validatedData['name']);
 
 
         if($request->hasFile('image')){

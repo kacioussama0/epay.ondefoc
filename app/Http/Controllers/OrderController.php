@@ -15,13 +15,26 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::select('id','customer_name','email','phone','product_id','transaction_id','created_at', 'status')->orderBy('created_at',"DESC")->get()->toArray();
-
-        return view('orders.index',compact('orders'));
+        $rows = Order::select('id','customer_name','email','phone','product_id','transaction_id','created_at', 'status')->orderBy('created_at',"DESC")->paginate(15);
+        $headers = ['رقم الطلب','الإسم واللقب','البريد الإلكتروني','رقم الهاتف','المنتج','رقم المعاملة','تاريخ','حالة الطلب'];
+        return view('orders.index',[
+            'rows' => $rows->getCollection()->map(function($row) {
+                return [
+                    $row->id,
+                    $row->customer_name,
+                    $row->email,
+                    $row->phone,
+                    $row->product->name,
+                    $row->transaction_id,
+                    $row->created_at->format('Y-m-d H:i'),
+                    $row->status,
+                ];
+            })->toArray(),
+            'headers' => $headers,
+            'pagination' => $rows,
+        ]);
 
     }
-
-
 
     public function sendReceipt($orderId) {
 

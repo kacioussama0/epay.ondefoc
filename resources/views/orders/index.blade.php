@@ -15,8 +15,12 @@
 
         <div class="container-fluid my-5">
 
-            <x-table :headers="['رقم الطلب','الإسم واللقب','البريد الإلكتروني','رقم الهاتف','المنتج','رقم المعاملة','تاريخ','حالة الطلب']" :rows="$orders" />
+            <x-table :headers="$headers" :rows="$rows" />
 
+        </div>
+
+        <div class="pagination d-flex justify-content-center">
+            {{ $pagination->links() }}
         </div>
 
     </section>
