@@ -123,4 +123,12 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    'satim' => [
+        'terminal_id' => env('SATIM_TERMINAL_ID', ''),
+        'username' => env('SATIM_USERNAME',''),
+        'password' => env('SATIM_PASSWORD',''),
+    ],
+
+    "recaptcha_key" => env('RECAPTCHA_KEY', '')
+
 ];

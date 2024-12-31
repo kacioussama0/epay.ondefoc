@@ -44,7 +44,7 @@ class OrderController extends Controller
 
         $data = [
             'transaction_id' => $order->transaction_id,
-            'order_id' => $order->id,
+            'order_id' => $order->orderNumber,
             'name' => $order->customer_name,
             'auth' => $order->authorization_number,
             'amount' => $order->amount,
@@ -68,7 +68,7 @@ class OrderController extends Controller
 
         $data = [
             'transaction_id' => $order->transaction_id,
-            'order_id' => $order->id,
+            'order_id' => $order->orderNumber,
             'auth' => $order->authorization_number,
             'amount' => $order->amount,
             'status' => $order->status,

@@ -23,11 +23,6 @@ class Order extends Model
         };
     }
 
-    public function getIdAttribute($value)
-    {
-        return "#$value";
-    }
-
 
     public function getCreatedAtAttribute($value)
     {

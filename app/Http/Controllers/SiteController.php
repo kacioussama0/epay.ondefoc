@@ -7,6 +7,7 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\URL;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class   SiteController extends Controller
 {
@@ -24,14 +25,35 @@ class   SiteController extends Controller
         return redirect()->to("/");
 
     }
+
+
+    public function generateQrCode($url)
+    {
+        
+            $qrCode = QrCode::format('png')
+                ->size(300)
+                ->color(109, 26, 61)
+                ->backgroundColor(255, 255, 255)
+                ->generate($url);
+
+            return base64_encode($qrCode);
+
+
+
+
+    }
+
     public function success(Request $request)
     {
         $orderId = $request->session()->get('tId');
 
+
+        $qrCode = $this->generateQrCode("http://localhost:8000/payment/success");
+
         if(!empty($orderId)) {
             $order = Order::where('transaction_id',$orderId)->where('status',"Paid")->first();
             if(empty($order)) abort(404);
-            return view('success',compact('order'));
+            return view('success',compact('order','qrCode'));
         }
 
         return redirect()->to("/");
@@ -53,7 +75,7 @@ class   SiteController extends Controller
     function verifyRecaptcha($responseKey, $userIP)
     {
         $url = 'https://www.google.com/recaptcha/api/siteverify';
-        $secretKey = env('CAPTCHA_KEY');
+        $secretKey = config('app.recaptcha_key');
 
         $data = [
             'secret' => $secretKey,
@@ -74,6 +96,12 @@ class   SiteController extends Controller
 
    public function order(Request $request,$slug)
    {
+
+
+       $lastRecord = Order::latest('id')->select('id')->first()->id;
+
+       $lastId = $lastRecord ? $lastRecord + 1 : 1;
+
        $userIP = $_SERVER['REMOTE_ADDR'];
 
        $product = Product::where('slug',$slug)->first();
@@ -98,21 +126,23 @@ class   SiteController extends Controller
 
 
        $satimInfo = [
-           "username" => env('SATIM_USERNAME'),
-           "password" => env('SATIM_PASSWORD'),
+           "username" => config('app.satim.username'),
+           "password" => config('app.satim.password'),
            "currency" => "012",
            "amount" => $product->price * 100,
            "language" => "AR",
            "return_url" => url('/payment/callback'),
        ];
 
+       $orderId = "VCAE" . str_pad($lastId, 6, "0", STR_PAD_LEFT);
+
+
        $jsonParams = [
-           'force_terminal_id' => env('SATIM_TERMINAL_ID'),
+           'force_terminal_id' => config('app.satim.terminal_id'),
+           'udf1' => $orderId
        ];
 
        $satimInfo["jsonParams"] = json_encode($jsonParams);
-
-       $orderId = hexdec(uniqid());
 
 
        $response = Http::get("https://test.satim.dz/payment/rest/register.do",[
@@ -156,8 +186,8 @@ class   SiteController extends Controller
 
         $response = Http::get('https://test.satim.dz/payment/rest/confirmOrder.do', [
             'orderId' => $orderId,
-            'userName'=> env('SATIM_USERNAME'),
-            'password'=> env('SATIM_PASSWORD'),
+            'userName'=> config('app.satim.username'),
+            'password'=> config('app.satim.password'),
             'language' => 'AR'
         ]);
 
@@ -173,7 +203,7 @@ class   SiteController extends Controller
 
                     $order->status = 'Paid';
                     $order->orderNumber = $result['OrderNumber'];
-                    $order->amount = $result['Amount'];
+                    $order->amount = $result['Amount'] / 100;
                     $order->ip = $result['Ip'];
                     $order->authorization_number = $result['approvalCode'];
                     $order->description = $result['params']['respCode_desc'];

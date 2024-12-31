@@ -103,6 +103,7 @@
                                 </form>
                             </div>
 
+
                             <div class="card-footer bg-transparent">
                                 <div class="satim d-flex flex-column align-items-center">
                                     <h5 class="fw-bold mb-3">في حال واجهتم مشكلة في الدفع SATIM</h5>

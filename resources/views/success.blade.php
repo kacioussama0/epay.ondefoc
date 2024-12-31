@@ -207,6 +207,10 @@
 
                                 <x-alert/>
 
+                                <div>
+                                    <img src="data:image/png;base64,{{ $qrCode }}" alt="code qr">
+                                </div>
+
                                 <table class="table table-bordered">
 
                                     <tr>
@@ -220,7 +224,7 @@
                                     </tr>
                                     <tr>
                                         <td>رقم الطلب</td>
-                                        <td>{{$order->id}}</td>
+                                        <td>{{$order->orderNumber}}</td>
                                     </tr>
                                     <tr>
                                         <td>رقم التفويض</td>
@@ -236,7 +240,7 @@
                                     </tr>
                                     <tr>
                                         <td>وسيلة الدفع</td>
-                                        <td>بطاقة بنكية</td>
+                                        <td>CIB/EDAHABIA</td>
                                     </tr>
                                 </table>
 

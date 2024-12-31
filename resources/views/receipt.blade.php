@@ -42,10 +42,11 @@
         <p><strong>N° Commande :</strong> {{ $order_id }}</p>
         <p><strong>N° Autorisation:</strong> {{ $auth }}</p>
         <p><strong>Date de Transaction :</strong> {{ $date }}</p>
-        <p><strong>Montant total:</strong> DA {{ number_format($amount / 100,2) }}</p>
+        <p><strong>Montant total:</strong> DA {{ number_format($amount, 2, '.', '') }}</p>
         <p><strong>Status:</strong> Payé</p>
         <p><strong>Mode De Paiement:</strong> CIB/Edhahabia</p>
     </div>
+
     <div class="receipt-footer">
         <p>Merci d'avoir choisi nos services Ondefoc.</p>
     </div>
