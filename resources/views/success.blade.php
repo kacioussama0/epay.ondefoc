@@ -207,9 +207,6 @@
 
                                 <x-alert/>
 
-                                <div>
-                                    <img src="data:image/png;base64,{{ $qrCode }}" alt="code qr">
-                                </div>
 
                                 <table class="table table-bordered">
 
@@ -236,7 +233,7 @@
                                     </tr>
                                     <tr>
                                         <td>الإجمالي</td>
-                                        <td>{{$order->amount / 100}} دينار جزائري </td>
+                                        <td>{{$order->amount}} د.ج </td>
                                     </tr>
                                     <tr>
                                         <td>وسيلة الدفع</td>
@@ -244,11 +241,16 @@
                                     </tr>
                                 </table>
 
+
                             </div>
                         </div>
 
 
 
+
+            <div>
+                <img src="data:image/png;base64,{{ $qrCode }}" class="mx-auto d-block my-3" alt="code qr">
+            </div>
 
             <div class="btn-group d-flex justify-content-center align-items-center" role="group" aria-label="reciept-send-methods">
 

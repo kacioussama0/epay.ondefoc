@@ -29,7 +29,7 @@ class   SiteController extends Controller
 
     public function generateQrCode($url)
     {
-        
+
             $qrCode = QrCode::format('png')
                 ->size(300)
                 ->color(109, 26, 61)
@@ -37,9 +37,6 @@ class   SiteController extends Controller
                 ->generate($url);
 
             return base64_encode($qrCode);
-
-
-
 
     }
 
