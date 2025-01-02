@@ -13,6 +13,7 @@ class Product extends Model
 
     protected $guarded = [];
 
+
     public function category()
     {
         return $this->belongsTo(Category::class);
@@ -25,5 +26,13 @@ class Product extends Model
     public function getCreatedAtAttribute($value)
     {
         return Date::createFromDate($value);
+    }
+
+    public function getTotalAmountAttribute()
+    {
+        $price = $this->attributes['sale_price'] ?  $this->attributes['sale_price'] : $this->attributes['price'] ;
+        $total = ((($this->attributes['tax_rate'] ?? 0)  / 100) * $price) + $price;
+
+        return number_format($total,2,'.','');
     }
 }

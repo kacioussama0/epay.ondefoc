@@ -22,13 +22,18 @@
                         <div class="card text-center rounded-4 border-0 shadow p-4">
                             <div class="card-body">
 
-                                <img src="https://ondefoc.dz/wp-content/uploads/2023/10/LOGO-ONDEFOC-1-1.png.webp" alt="logo" class="object-fit-contain w-100" height="250">
+                                <img src="{{$product->image ? asset('storage/' . $product->image) : asset('images/Ondefoc Purple.svg')}}" alt="logo" class="object-fit-contain w-100" height="250">
 
                                 <h3 class="card-title text-truncate">{{$product->name}}</h3>
-                                <h6 class="card-subtitle mb-2 badge bg-dark">{{$product->category->name}}</h6>
+                                <h6 class="card-subtitle mb-4 badge bg-dark">{{$product->category->name}}</h6>
                                 <br>
-                                <span class="text-success mb-5 fs-3 fw-bold">{{number_format($product->price,2,'.','')}} د.ج </span>
 
+                                @isset($product->sale_price)
+                                    <span class="text-success mb-5 fs-4 fw-bold me-2">{{ number_format($product->sale_price,2,'.','')}}د.ج </span>
+                                    <del class="text-danger mb-5 fs-4 fw-bold">{{ number_format($product->price,2,'.','')}}د.ج </del>
+                                @else
+                                    <span class="text-success mb-5 fs-4 fw-bold">{{ number_format($product->price,2,'.','')}}د.ج </span>
+                                @endisset
                                 <br>
                                 <br>
 

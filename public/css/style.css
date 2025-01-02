@@ -12,6 +12,10 @@ header nav {
     transition: .3s;
 }
 
+header nav svg , footer svg {
+    height: 70px;
+}
+
 header nav .navbar-toggler {
     border: none;
 }

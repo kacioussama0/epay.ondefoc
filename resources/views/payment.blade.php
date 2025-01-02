@@ -13,7 +13,7 @@
         <div class="container">
 
 
-                <div class="row g-5">
+                <div class="row gy-5 g-md-5 ">
 
                     <div class="col-lg-6  d-flex justify-content-center align-items-center  py-5 ">
                         <img src="{{asset('images/Cartes_paiments.png')}}" alt="illustration payment" class="img-fluid">
@@ -26,12 +26,34 @@
 
                             <div class="card-body p-4">
 
-                                <div class="d-flex align-items-center justify-content-between border-bottom pb-4 border-1 border-opacity-25 border-secondary mb-5">
-                                    <span class="fs-3 fw-bold">{{$product->name}}</span>
-                                    <span class="text-primary fs-2 fw-bold">{{number_format($product->price,2,'.','')}} دج </span>
+
+                                <div class="table-responsive">
+
+                                    <table class="table  table-bordered">
+
+                                        <tr>
+                                            <td>{{$product->name}}</td>
+                                            <td>{{$product->sale_price ? number_format($product->sale_price,2,'.','') : number_format($product->price,2,'.','')}} دج </td>
+                                        </tr>
+
+
+                                        <tr>
+                                            <td>قيمة الضريبة TVA</td>
+                                            <td>{{$product->tax_rate ?? 0}}%</td>
+                                        </tr>
+
+                                        <tr class="table-primary fs-5 fw-bold">
+                                            <th>السعر الإجمالي</th>
+                                            <td>{{$product->total_amount}} د.ج </td>
+                                        </tr>
+
+                                    </table>
+
                                 </div>
 
-                                <p class="my-3">{{$product->description}}</p>
+
+
+                                <p class="mb-5">{{$product->description}}</p>
 
                                 <h3 class="mb-5">
                                     تفاصيل الزبون

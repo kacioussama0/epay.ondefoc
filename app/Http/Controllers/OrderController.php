@@ -7,12 +7,16 @@ use App\Models\Order;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class OrderController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+
+
+
     public function index()
     {
         $rows = Order::select('id','customer_name','email','phone','product_id','transaction_id','created_at', 'status')->orderBy('created_at',"DESC")->paginate(15);
@@ -36,9 +40,24 @@ class OrderController extends Controller
 
     }
 
+    public function generateQrCode($url)
+    {
+        $imagePath = "/public/images/logo-qr.png";
+        $qrCode = QrCode::format('png') // Generate in PNG format
+        ->size(200) // Increase the size for better appearance
+        ->merge($imagePath, 0.15) // Add a logo, 20% of QR code size
+        ->margin(2) // Add a smaller margin for a clean look
+        ->color(109,26,61)
+            ->generate($url); // The content of the QR code
+
+        return base64_encode($qrCode);
+
+    }
+
     public function sendReceipt($orderId) {
 
         $order = Order::where('transaction_id',$orderId)->first();
+        $qrCode = $this->generateQrCode(url('payment/check/' . $order->transaction_id));
 
         if(empty($order)) abort(404);
 
@@ -50,6 +69,7 @@ class OrderController extends Controller
             'amount' => $order->amount,
             'status' => $order->status,
             'date' => $order->created_at->format('Y-m-d H:i:s'),
+            'qrCode' => $qrCode
         ];
 
         Mail::to($order->email)->send(new ReceiptMail($data));
@@ -62,7 +82,7 @@ class OrderController extends Controller
     public function generateReceipt($orderId)
     {
         $order = Order::where('transaction_id',$orderId)->first();
-
+        $qrCode = $this->generateQrCode(url('payment/check/' . $order->transaction_id));
 
         if(empty($order)) abort(404);
 
@@ -73,6 +93,7 @@ class OrderController extends Controller
             'amount' => $order->amount,
             'status' => $order->status,
             'date' => $order->created_at->format('Y-m-d H:i:s'),
+            'qrCode' => $qrCode
         ];
 
         $pdf = Pdf::loadView('receipt', $data);

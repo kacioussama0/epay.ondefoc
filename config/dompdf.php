@@ -45,25 +45,9 @@ return [
          * Times-Roman, Times-Bold, Times-BoldItalic, Times-Italic,
          * Symbol, ZapfDingbats.
          */
-        'font_dir' => storage_path('public/fonts'), // advised by dompdf (https://github.com/dompdf/dompdf/pull/782)
+        'font_dir' => storage_path('fonts/'), // Directory for storing custom fonts
+        'font_cache' => storage_path('fonts/'), // Directory for caching font data
 
-        /**
-         * The location of the DOMPDF font cache directory
-         *
-         * This directory contains the cached font metrics for the fonts used by DOMPDF.
-         * This directory can be the same as DOMPDF_FONT_DIR
-         *
-         * Note: This directory must exist and be writable by the webserver process.
-         */
-        'font_cache' => storage_path('fonts/'),
-
-        'font_family' => [
-            'default' => 'serif',
-            'IBM Plex Sans Arabic' => [
-                'R'  => 'IBMPlexSansArabic-Regular.ttf',
-                'B'  => 'IBMPlexSansArabic-Bold.ttf',
-            ],
-        ],
 
 
 

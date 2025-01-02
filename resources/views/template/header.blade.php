@@ -1,11 +1,9 @@
-<header class="{{Request::url() == url('/') ? 'shadow-sm ' : ''}} position-{{Request::url() == url('/') ? 'fixed' : 'sticky'}}  w-100 top-0 z-4 ">
+<header class="{{Request::url() == url('/') ? 'shadow-sm ' : ''}} position-{{Request::url() == url('/') ? 'fixed' : 'sticky'}}  w-100 top-0 z-4">
 
-    <nav class="navbar navbar-expand-lg navbar-dark {{Request::url() == url('/') ? " bg-transparent" : "bg-primary"}}">
+    <nav class="navbar navbar-expand-lg navbar-dark  py-2 {{Request::url() == url('/') ? " bg-transparent" : "bg-primary"}}">
         <div class="container">
-            <a class="navbar-brand" href="{{url('/')}}">
-
-                    <img src="https://cdn.ondefoc.dz/wp-content/uploads/2023/10/Capture_d_ecran_2023-10-18_003858-removebg-preview-1-300x73.png" alt="logo-ondefoc" height="65">
-
+            <a class="navbar-brand text-sm-center" href="{{url('/')}}">
+                <img src="{{asset('images/Ondefoc White.svg')}}" alt="" width="250">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="bi bi-three-dots-vertical"></span>
@@ -32,8 +30,6 @@
 
 
                     @auth
-
-
 
 
 

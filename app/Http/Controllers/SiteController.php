@@ -29,12 +29,13 @@ class   SiteController extends Controller
 
     public function generateQrCode($url)
     {
-
-            $qrCode = QrCode::format('png')
-                ->size(300)
-                ->color(109, 26, 61)
-                ->backgroundColor(255, 255, 255)
-                ->generate($url);
+            $imagePath = "/public/images/logo-qr.png";
+            $qrCode = QrCode::format('png') // Generate in PNG format
+            ->size(300) // Increase the size for better appearance
+            ->merge($imagePath, 0.15) // Add a logo, 20% of QR code size
+            ->margin(2) // Add a smaller margin for a clean look
+            ->color(109,26,61)
+            ->generate($url); // The content of the QR code
 
             return base64_encode($qrCode);
 
@@ -126,12 +127,12 @@ class   SiteController extends Controller
            "username" => config('app.satim.username'),
            "password" => config('app.satim.password'),
            "currency" => "012",
-           "amount" => $product->price * 100,
+           "amount" => $product->total_amount * 100,
            "language" => "AR",
            "return_url" => url('/payment/callback'),
        ];
 
-       $orderId = "VCAE" . str_pad($lastId, 6, "0", STR_PAD_LEFT);
+       $orderId = $product->sku . str_pad($lastId, 6, "0", STR_PAD_LEFT);
 
 
        $jsonParams = [

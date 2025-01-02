@@ -172,8 +172,13 @@
                 display: block !important;
             }
 
+            .shadow {
+                box-shadow: none !important;
+            }
+
 
         }
+
 
 
     </style>
@@ -187,22 +192,26 @@
         <div class="container my-5 py-5">
 
 
-            <img src="https://ondefoc.dz/wp-content/uploads/2023/10/LOGO-ONDEFOC-1-1.png.webp" id="logo-print" class="d-none mx-auto mb-5" alt="logo-ondefoc" height="100">
+            <img src="{{asset('images/Ondefoc Purple.svg')}}" id="logo-print" class="d-none mx-auto mb-5" alt="logo-ondefoc" height="100">
 
 
-            <div class="success-checkmark">
-                            <div class="check-icon">
-                                <span class="icon-line line-tip"></span>
-                                <span class="icon-line line-long"></span>
-                                <div class="icon-circle"></div>
-                                <div class="icon-fix"></div>
-                            </div>
-                        </div>
-
-                        <h1 class="fw-bolder text-success mb-5 display-2 d-flex justify-content-center align-items-center">{{$order->description}}</h1>
 
 
                         <div class="card shadow border-0 my-5 p-3">
+
+                            <div class="card-header bg-transparent border-0">
+                                <div class="success-checkmark">
+                                    <div class="check-icon">
+                                        <span class="icon-line line-tip"></span>
+                                        <span class="icon-line line-long"></span>
+                                        <div class="icon-circle"></div>
+                                        <div class="icon-fix"></div>
+                                    </div>
+                                </div>
+
+                                <h1 class="fw-bolder text-success mb-5 display-2 d-flex justify-content-center align-items-center">{{$order->description}}</h1>
+                            </div>
+
                             <div class="card-body">
 
                                 <x-alert/>
@@ -233,7 +242,7 @@
                                     </tr>
                                     <tr>
                                         <td>الإجمالي</td>
-                                        <td>{{$order->amount}} د.ج </td>
+                                        <td>{{number_format($order->amount,2,'.','')}} د.ج </td>
                                     </tr>
                                     <tr>
                                         <td>وسيلة الدفع</td>
@@ -243,39 +252,40 @@
 
 
                             </div>
+
+                            <div class="card-footer border-0 bg-transparent">
+
+                                <div class="btn-group d-flex justify-content-center align-items-center" role="group" aria-label="reciept-send-methods">
+
+                                    <a href="{{url('/receipt/' . $order->transaction_id)}}" class="btn btn-danger">
+                                        <i class="bi bi-file-pdf-fill ms-2"></i> PDF
+                                    </a>
+
+                                    <button type="button" class="btn btn-success" onclick="window.print()" >
+                                        <i class="bi bi-printer-fill ms-2"></i> طباعة
+                                    </button>
+
+                                    <a href="{{url('/receipt/' . $order->transaction_id . '/email')}}" class="btn btn-warning">
+                                        <i class="bi bi-envelope-fill ms-2"></i> بريد
+                                    </a>
+
+
+                                </div>
+
+                            </div>
+
                         </div>
 
 
 
-
-            <div>
-                <img src="data:image/png;base64,{{ $qrCode }}" class="mx-auto d-block my-3" alt="code qr">
-            </div>
-
-            <div class="btn-group d-flex justify-content-center align-items-center" role="group" aria-label="reciept-send-methods">
-
-                <a href="{{url('/receipt/' . $order->transaction_id)}}" class="btn btn-danger">
-                    <i class="bi bi-file-pdf-fill ms-2"></i> PDF
-                </a>
-
-                <button type="button" class="btn btn-success" onclick="window.print()" >
-                    <i class="bi bi-printer-fill ms-2"></i> طباعة
-                </button>
-
-                <a href="{{url('/receipt/' . $order->transaction_id . '/email')}}" class="btn btn-warning">
-                    <i class="bi bi-envelope-fill ms-2"></i> بريد
-                </a>
-
-
-            </div>
 
 
             <div class="satim d-flex flex-column align-items-center my-5">
 
-                            <h5 class="fw-bold mb-3">في حال واجهتم مشكلة في الدفع SATIM</h5>
-                            <img src="{{asset('images/numero-vert-satim.png')}}" class="w-25" alt="satim-green-number">
+                    <h5 class="fw-bold mb-3">في حال واجهتم مشكلة في الدفع SATIM</h5>
+                    <img src="{{asset('images/numero-vert-satim.png')}}" class="w-25" alt="satim-green-number">
 
-                        </div>
+            </div>
 
         </div>
 

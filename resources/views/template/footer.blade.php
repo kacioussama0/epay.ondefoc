@@ -2,11 +2,12 @@
 
     <div class="container">
 
-        <div class="row g-4 gx-md-5">
+        <div class="row g-4 gx-md-5  text-md-start text-center ">
 
 
-            <div class="col-md-4" >
-                <img src="https://cdn.ondefoc.dz/wp-content/uploads/2023/10/Capture_d_ecran_2023-10-18_003858-removebg-preview-1-300x73.png" alt="ondefoc-logo" height="65" class="mb-4" data-os>
+            <div class="col-md-4">
+                <img src="{{asset('images/Ondefoc White.svg')}}" alt="" height="50" class="mb-5">
+
                 <p class="lh-lg">مؤسسة عمومية ذات طابع صناعي وتجاري تحت وصاية وزارة التكوين والتعليم المهنيين متخصص بالتكوين المتواصل والدراسات والاستشارة وتقديم المساعدة للشركات والمؤسسات العمومية والخاصة.</p>
             </div>
 
@@ -48,7 +49,7 @@
 
                     </div>
 
-                    <div class="col-md-6 text-start text-md-end ">
+                    <div class="col-md-6">
                         <p class="mb-0">كل الحقوق محفوظة الديوان الوطني لتطوير التكوين المتواصل و ترقيته &copy; {{date("Y")}}</p>
                     </div>
 
