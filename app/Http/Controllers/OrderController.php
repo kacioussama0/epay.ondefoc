@@ -57,32 +57,35 @@ class OrderController extends Controller
     public function sendReceipt($orderId) {
 
         $order = Order::where('transaction_id',$orderId)->first();
-        $qrCode = $this->generateQrCode(url('payment/check/' . $order->transaction_id));
+        $qrCode = $this->generateQrCode(url('/payment/check/' . $order->transaction_id));
 
         if(empty($order)) abort(404);
 
         $data = [
             'transaction_id' => $order->transaction_id,
             'order_id' => $order->orderNumber,
-            'name' => $order->customer_name,
             'auth' => $order->authorization_number,
             'amount' => $order->amount,
+            'tax_rate' => $order->product->tax_rate,
+            'total_amount' => $order->product->total_amount,
+            'tva' => $order->product->tax_rate,
+            'sale_amount' => $order->product->sale_price ? number_format( $order->product->sale_price,2,'.','') : number_format( $order->product->price,2,'.',''),
+            'name' => $order->customer_name,
+            'product_sku' => $order->product->sku,
             'status' => $order->status,
             'date' => $order->created_at->format('Y-m-d H:i:s'),
             'qrCode' => $qrCode
         ];
-
         Mail::to($order->email)->send(new ReceiptMail($data));
 
         return redirect()->to('/payment/success')->with('success', 'تم إرسال الوصل إلى بريدك الإلكتروني بنجاح');
-
 
     }
 
     public function generateReceipt($orderId)
     {
         $order = Order::where('transaction_id',$orderId)->first();
-        $qrCode = $this->generateQrCode(url('payment/check/' . $order->transaction_id));
+        $qrCode = $this->generateQrCode(url('/payment/check/' . $order->transaction_id));
 
         if(empty($order)) abort(404);
 
@@ -91,6 +94,12 @@ class OrderController extends Controller
             'order_id' => $order->orderNumber,
             'auth' => $order->authorization_number,
             'amount' => $order->amount,
+            'tax_rate' => $order->product->tax_rate,
+            'total_amount' => $order->product->total_amount,
+            'tva' => $order->product->tax_rate,
+            'sale_amount' => $order->product->sale_price ? number_format( $order->product->sale_price,2,'.','') : number_format( $order->product->price,2,'.',''),
+            'name' => $order->customer_name,
+            'product_sku' => $order->product->sku,
             'status' => $order->status,
             'date' => $order->created_at->format('Y-m-d H:i:s'),
             'qrCode' => $qrCode
@@ -98,10 +107,20 @@ class OrderController extends Controller
 
         $pdf = Pdf::loadView('receipt', $data);
 
-        return $pdf->download('وصل الدفع.pdf');
+        return $pdf->download('receipt-'. $order->orderNumber .'.pdf');
     }
 
 
+    public function check($orderId)
+    {
+        $order = Order::where('transaction_id',$orderId)->where('status','Paid')->first();
+
+        $status = true;
+
+        if(empty($order)) $status = false;
+
+        return view('check',compact('order','status'));
+    }
 
     /**
      * Show the form for creating a new resource.

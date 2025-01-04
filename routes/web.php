@@ -14,9 +14,14 @@ Route::get('/receipt/{orderId}/email', [\App\Http\Controllers\OrderController::c
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/payment/callback', [\App\Http\Controllers\SiteController::class, 'callback']);
-Route::get('/payment/success', [\App\Http\Controllers\SiteController::class, 'success']);
-Route::get('/payment/failed', [\App\Http\Controllers\SiteController::class, 'failed']);
+
+
+Route::prefix('payment')->group(function () {
+    Route::get('callback', [\App\Http\Controllers\SiteController::class, 'callback']);
+    Route::get('success', [\App\Http\Controllers\SiteController::class, 'success']);
+    Route::get('failed', [\App\Http\Controllers\SiteController::class, 'failed']);
+    Route::get('check/{orderId}', [\App\Http\Controllers\OrderController::class, 'check']);
+});
 
 Route::get('/products',[\App\Http\Controllers\SiteController::class,'products']);
 Route::get('/products/{slug}',[\App\Http\Controllers\SiteController::class,'product']);
@@ -30,3 +35,23 @@ Route::prefix('admin')->middleware('auth')->group(function(){
 
 
 
+Route::fallback(function () {
+    return response()->view('errors.custom', [
+        'code' => 404,
+        'message' => 'الصفحة غير موجودة'
+    ], 404);
+});
+
+Route::get('/error/{code}', function ($code) {
+    $messages = [
+        403 => 'ليس لديك إذن للوصول إلى هذه الصفحة.',
+        404 => 'الصفحة غير موجودة.',
+        500 => 'حدث خطأ داخلي في الخادم.',
+    ];
+
+    return response()->view('errors.custom', [
+        'code' => $code,
+        'message' => $messages[$code] ?? 'حدث خطأ غير معروف.',
+    ], $code);
+
+})->where('code', '[0-9]+');

@@ -1,6 +1,6 @@
 <header class="{{Request::url() == url('/') ? 'shadow-sm ' : ''}} position-{{Request::url() == url('/') ? 'fixed' : 'sticky'}}  w-100 top-0 z-4">
 
-    <nav class="navbar navbar-expand-lg navbar-dark  py-2 {{Request::url() == url('/') ? " bg-transparent" : "bg-primary"}}">
+    <nav class="navbar navbar-expand-lg navbar-dark shadow-sm  py-2 {{Request::url() == url('/') ? " bg-transparent" : "bg-primary"}}">
         <div class="container">
             <a class="navbar-brand text-sm-center" href="{{url('/')}}">
                 <img src="{{asset('images/Ondefoc White.svg')}}" alt="" width="250">
@@ -27,13 +27,6 @@
                     <li class="nav-item">
                         <a class="nav-link {{Request::url() == url('/') ? '/contact-us' : ''}}" href="#">إتصل بنا</a>
                     </li>
-
-
-                    @auth
-
-
-
-                    @endauth
 
                 </ul>
 

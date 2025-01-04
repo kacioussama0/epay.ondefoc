@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -46,7 +47,7 @@ class   SiteController extends Controller
         $orderId = $request->session()->get('tId');
 
 
-        $qrCode = $this->generateQrCode("http://localhost:8000/payment/success");
+        $qrCode = $this->generateQrCode(\url('/payment/check/' . $orderId));
 
         if(!empty($orderId)) {
             $order = Order::where('transaction_id',$orderId)->where('status',"Paid")->first();
@@ -244,8 +245,8 @@ class   SiteController extends Controller
     public function products()
    {
        $products = Product::where('status','published')->orderBy('created_at','DESC')->get();
-
-       return  view('products',compact('products'));
+       $categories = Category::all();
+       return  view('products',compact('products','categories'));
 
    }
 

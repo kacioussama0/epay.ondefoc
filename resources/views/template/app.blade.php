@@ -37,7 +37,9 @@
 </head>
 <body>
 
-    <x-loader/>
+    @if(!Request::is('payment/*'))
+        <x-loader/>
+    @endif
 
     @include('template.header')
 
@@ -52,5 +54,6 @@
 
     @include('template.scripts')
 
+    @yield('scripts')
 </body>
 </html>
