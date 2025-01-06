@@ -8,7 +8,7 @@
             @endforeach
 
             @if ($hasActions)
-                <th class="border px-4 py-2">الإجراءات</th>
+                <th class="px-4 py-2">الإجراءات</th>
             @endif
         </tr>
         </thead>
@@ -20,8 +20,10 @@
                 @endforeach
 
                 @if ($hasActions)
-                    <td class="border px-4 py-2 text-center">
-                        {!! $actions($row)  !!}
+                    <td class="px-4 py-2">
+                        <div class="text-center d-flex justify-content-center">
+                            {!! $actions($row)  !!}
+                        </div>
                     </td>
                 @endif
             </tr>

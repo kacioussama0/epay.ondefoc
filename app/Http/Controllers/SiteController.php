@@ -143,7 +143,6 @@ class   SiteController extends Controller
 
        $satimInfo["jsonParams"] = json_encode($jsonParams);
 
-
        $response = Http::get("https://test.satim.dz/payment/rest/register.do",[
            "userName" => $satimInfo['username'],
            "password" => $satimInfo['password'],

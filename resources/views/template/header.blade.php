@@ -13,19 +13,19 @@
                 <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
 
                     <li class="nav-item">
-                        <a class="nav-link {{Request::url() == url('/') ? 'active' : ''}}" aria-current="page" href="{{url('/')}}">الرئيسية</a>
+                        <a class="nav-link {{Request::is('/') ? 'active' : ''}}" aria-current="page" href="{{url('/')}}">الرئيسية</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link {{Request::url() == url('/products') ? 'active' : ''}}" href="{{url('products')}}">منتجاتنا</a>
+                        <a class="nav-link {{Request::is('products/*') ? 'active' : ''}}" href="{{url('products')}}">منتجاتنا</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link {{Request::url() == url('/conditions') ? 'active' : ''}}" href="{{url('/conditions')}}">شروط الإستعمال</a>
+                        <a class="nav-link {{Request::is('conditions') ? 'active' : ''}}" href="{{url('/conditions')}}">شروط الإستعمال</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link {{Request::url() == url('/') ? '/contact-us' : ''}}" href="#">إتصل بنا</a>
+                        <a class="nav-link {{Request::is('contact-us') == url('/') ? 'active' : ''}}" href="#">إتصل بنا</a>
                     </li>
 
                 </ul>
@@ -33,8 +33,8 @@
 
                 @auth
 
-                    <div class="dropdown">
-                        <a class="nav-link text-light dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <div class="dropdown nav-item">
+                        <a class="nav-link  dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             لوحة التحكم
                         </a>
                         <ul class="dropdown-menu">

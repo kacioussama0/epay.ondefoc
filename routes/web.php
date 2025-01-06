@@ -35,23 +35,23 @@ Route::prefix('admin')->middleware('auth')->group(function(){
 
 
 
-Route::fallback(function () {
-    return response()->view('errors.custom', [
-        'code' => 404,
-        'message' => 'الصفحة غير موجودة'
-    ], 404);
-});
-
-Route::get('/error/{code}', function ($code) {
-    $messages = [
-        403 => 'ليس لديك إذن للوصول إلى هذه الصفحة.',
-        404 => 'الصفحة غير موجودة.',
-        500 => 'حدث خطأ داخلي في الخادم.',
-    ];
-
-    return response()->view('errors.custom', [
-        'code' => $code,
-        'message' => $messages[$code] ?? 'حدث خطأ غير معروف.',
-    ], $code);
-
-})->where('code', '[0-9]+');
+//Route::fallback(function () {
+//    return response()->view('errors.custom', [
+//        'code' => 404,
+//        'message' => 'الصفحة غير موجودة'
+//    ], 404);
+//});
+//
+//Route::get('/error/{code}', function ($code) {
+//    $messages = [
+//        403 => 'ليس لديك إذن للوصول إلى هذه الصفحة.',
+//        404 => 'الصفحة غير موجودة.',
+//        500 => 'حدث خطأ داخلي في الخادم.',
+//    ];
+//
+//    return response()->view('errors.custom', [
+//        'code' => $code,
+//        'message' => $messages[$code] ?? 'حدث خطأ غير معروف.',
+//    ], $code);
+//
+//})->where('code', '[0-9]+');

@@ -15,13 +15,14 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::select('name','sku','image','stock','tax_rate','price','category_id','created_at')->orderBy('created_at',"DESC")->get();
+        $products = Product::select('id','name','sku','image','stock','tax_rate','price','category_id','created_at')->orderBy('created_at',"DESC")->get();
 
-        $headers = ['الصورة','الإسم','SKU','TVA','المخزون','السعر','التصنيف','التاريخ'];
+        $headers = ['#','الصورة','الإسم','SKU','TVA','المخزون','السعر','التصنيف','التاريخ'];
 
         $rows = $products->map(function ($product) {
             return [
-                "<img src='" . ($product['image'] ? asset('storage/' . $product['image']) : "https://ondefoc.dz/wp-content/uploads/2023/10/LOGO-ONDEFOC-1-1.png.webp" ). "' alt='{$product['name']}' width='80'>",
+                $product->id,
+                "<img src='" . ($product['image'] ? asset('storage/' . $product['image']) : asset('images/Ondefoc Purple.svg') ). "' alt='{$product['name']}' width='80'>",
                 $product['name'],
                 $product['sku'],
                 ($product['tax_rate'] ?? 0) . '%',
@@ -36,8 +37,12 @@ class ProductController extends Controller
 
         $actions = function ($row) {
             return '
-            <a href=' . route('products.edit',$row[0]) . ' class="btn btn-outline-primary">تعديل</a>
-            <a href="/delete/' . $row[0] . '" class="btn btn-primary mx-2">حذف</a>
+            <a href=' . route('products.edit',$row[0]) . ' class="btn btn-outline-primary me-2">تعديل</a> '.
+            '<form action="' . route('products.destroy',$row[0]) .  '" onclick="return confirm(\'هل أنت متأكد ?\')" method="POST">' . '
+                 <input type="hidden" name="_token" value="'. csrf_token() .
+              '" /><input type="hidden" name="_method" value="DELETE" />
+                 <input type="submit" value="حذف" class="btn btn-primary">
+            </form>
         ';
         };
 

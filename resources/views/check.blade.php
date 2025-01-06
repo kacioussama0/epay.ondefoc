@@ -12,11 +12,6 @@
 
         <div class="container my-5 py-5">
 
-
-
-
-
-
                         <div class="card shadow border-0 my-5 p-md-5">
 
                             <div class="card-header bg-transparent border-0">

@@ -7,29 +7,57 @@
 
 @section('content')
 
-    <x-page-title>صفحة الدفع</x-page-title>
+
+    <section class="product-details">
+
+        <div class="container">
+
+            <div class="row my-5 g-md-5 gy-5 align-items-center text-md-start text-center">
+
+
+                <div class="col-md-6">
+                    <h2 class="mb-4 display-2 fw-bolder">{{$product->name}}</h2>
+                    <p>{{$product->description}}</p>
+                </div>
+
+                <div class="col-md-6">
+                    <img src="{{$product->image ? asset('storage/' . $product->image) : asset('images/Ondefoc Purple.svg')}}" alt="logo" class="object-fit-contain w-100">
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <hr>
+
     <section class="payment-content">
 
         <div class="container">
 
 
-                <div class="row gy-5 g-md-5 ">
+                <div class="row g-md-5 justify-content-center align-items-center">
 
-                    <div class="col-lg-6  d-flex justify-content-center align-items-center  py-5 ">
+                    <div class="col-lg-6   order-lg-0 order-1 text-center">
                         <img src="{{asset('images/Cartes_paiments.png')}}" alt="illustration payment" class="img-fluid">
                     </div>
 
                     <div class="col-lg-6 py-5">
 
 
-                        <div class="card border-0 shadow">
+                        <div class="card border-0 rounded-4 shadow">
 
-                            <div class="card-body p-4">
+                            <div class="card-header p-4 bg-transparent">
 
+                                <h3 class="mb-4 fw-bold text-primary">
+                                    تفاصيل الدفع
+                                </h3>
 
                                 <div class="table-responsive">
 
-                                    <table class="table  table-bordered">
+                                    <table class="table table-bordered">
 
                                         <tr>
                                             <td>{{$product->name}}</td>
@@ -50,11 +78,13 @@
                                     </table>
 
                                 </div>
+                            </div>
 
 
-                                <p class="mb-5">{{$product->description}}</p>
+                            <div class="card-body p-4">
 
-                                <h3 class="mb-5">
+
+                                <h3 class="mb-4 fw-bold  text-primary">
                                     تفاصيل الزبون
                                 </h3>
 

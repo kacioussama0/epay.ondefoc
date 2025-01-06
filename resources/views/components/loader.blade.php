@@ -1665,6 +1665,12 @@
         animation: animate-svg-fill-66 0.7s ease-out 1.95s both;
     }
 
+    @media (max-width: 500px) {
+        svg {
+            width: 250px;
+        }
+    }
+
 
 </style>
 
