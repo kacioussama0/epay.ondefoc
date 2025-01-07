@@ -6,6 +6,8 @@
 
 @section('content')
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
     <section class="landing-page d-flex flex-column justify-content-center align-items-center position-relative z-3 vh-100 overflow-hidden">
 
 
@@ -39,29 +41,15 @@
 
             <div class="row">
 
-                <div class="col-md-4">
-                    <img src="{{asset('images/online-cart.svg')}}" alt="" class="img-fluid mb-3">
-                    <div class="d-flex align-items-center justify-content-center fw-bolder">
-                        <span class="rounded-circle bg-primary text-light  fs-4 d-flex align-items-center justify-content-center text-center me-2" style="width: 40px;height: 40px">1</span>
-                        <h6 class="fw-bold mb-0">واجهة عبر الإنترنت</h6>
+                @foreach($features as $key => $feature)
+                    <div class="col-md-4" >
+                        <img src="{{$feature['image']}}" alt="" class="img-fluid mb-3">
+                        <div class="d-flex align-items-center justify-content-center fw-bolder">
+                            <span class="rounded-circle bg-primary text-light  fs-4 d-flex align-items-center justify-content-center text-center me-2" style="width: 40px;height: 40px">{{$key + 1}}</span>
+                            <h6 class="fw-bold mb-0">{{$feature['title']}}</h6>
+                        </div>
                     </div>
-                </div>
-
-                <div class="col-md-4" >
-                    <img src="{{asset('images/user-card.svg')}}" alt="" class="img-fluid mb-3">
-                    <div class="d-flex align-items-center justify-content-center fw-bolder">
-                        <span class="rounded-circle bg-primary text-light  fs-4 d-flex align-items-center justify-content-center text-center me-2" style="width: 40px;height: 40px">2</span>
-                        <h6 class="fw-bold mb-0">رمز الأمان</h6>
-                    </div>
-                </div>
-
-                <div class="col-md-4" >
-                    <img src="{{asset('images/recu-enline.svg')}}" alt="" class="img-fluid mb-3">
-                    <div class="d-flex align-items-center justify-content-center fw-bolder">
-                        <span class="rounded-circle bg-primary text-light  fs-4 d-flex align-items-center justify-content-center text-center me-2" style="width: 40px;height: 40px">3</span>
-                        <h6 class="fw-bold mb-0">إيصال الدفع</h6>
-                    </div>
-                </div>
+                @endforeach
 
             </div>
 
@@ -71,119 +59,50 @@
 
     <section class="bg-primary-subtle py-5" >
         <div class="container py-4">
-            <h2 class="display-4 fw-bold text-center mb-3" data-aos="fade-down">شركائنا</h2>
-            <p class="fs-4 text-center fw-light mb-5" data-aos="fade-up">شركاؤنا هم أساس نجاحنا، نعمل مع الأفضل لنقدم حلولاً مبتكرة بجودة عالية تلبي تطلعات عملائنا.</p>
+            <h2 class="display-4 fw-bold text-center mb-3" data-aos="fade-down">الشبكة البنكية للدفع الإلكتروني</h2>
+            <p class="fs-4 text-center fw-light mb-5" data-aos="fade-up">تدعم منصتنا الدفع الإلكتروني عبر شبكة البنوك المتصلة، مما يضمن تنفيذ المعاملات بسرعة وأمان، مع توفير خدمات التحويل والدفع عبر الإنترنت بشكل موثوق ومباشر.</p>
 
-            <div class="row gx-md-3 gy-3 my-5" data-aos="fade-up">
+            <!-- Swiper -->
+            <div class="swiper banks py-3 my-5" data-aos="fade-up">
+                <div class="swiper-wrapper">
 
-
-                <div class="col-lg-2 col-md-3 col-sm-6 col-12">
-                    <div class="card rounded-4">
-                        <div class="card-body text-center">
-                            <img src="https://cdn.ondefoc.dz/wp-content/uploads/2024/01/11-1.png.webp" class="img-fluid" alt="logo-saidal">
+                    @foreach($banks as $bank)
+                        <div class="swiper-slide">
+                            <a href="{{$bank['url']}}" target="_blank"><img src="{{$bank['image']}}" class="object-fit-contain" alt="{{$bank['alt']}}" width="200" height="150"></a>
                         </div>
-                    </div>
+                    @endforeach
+
                 </div>
-
-                <div class="col-lg-2 col-md-3 col-sm-6 col-12">
-                    <div class="card rounded-4">
-                        <div class="card-body text-center">
-                            <img src="https://cdn.ondefoc.dz/wp-content/uploads/2024/01/6-1.png.webp" class="img-fluid" alt="logo-saidal">
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="col-lg-2 col-md-3 col-sm-6 col-12">
-                    <div class="card rounded-4">
-                        <div class="card-body text-center">
-                            <img src="https://cdn.ondefoc.dz/wp-content/uploads/2024/01/20-1.png.webp" class="img-fluid" alt="logo-saidal">
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="col-lg-2 col-md-3 col-sm-6 col-12">
-                    <div class="card rounded-4">
-                        <div class="card-body text-center">
-                            <img src="https://cdn.ondefoc.dz/wp-content/uploads/2024/01/5-1.png.webp" class="img-fluid" alt="logo-saidal">
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="col-lg-2 col-md-3 col-sm-6 col-12">
-                    <div class="card rounded-4">
-                        <div class="card-body text-center">
-                            <img src="https://cdn.ondefoc.dz/wp-content/uploads/2024/01/14-1.png.webp" class="img-fluid" alt="logo-saidal">
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="col-lg-2 col-md-3 col-sm-6 col-12">
-                    <div class="card rounded-4">
-                        <div class="card-body text-center">
-                            <img src="https://cdn.ondefoc.dz/wp-content/uploads/2024/01/8-1.png.webp" class="img-fluid" alt="logo-saidal">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-2 col-md-3 col-sm-6 col-12">
-                    <div class="card rounded-4">
-                        <div class="card-body text-center">
-                            <img src="https://cdn.ondefoc.dz/wp-content/uploads/2024/01/15-1.png.webp" class="img-fluid" alt="logo-saidal">
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="col-lg-2 col-md-3 col-sm-6 col-12">
-                    <div class="card rounded-4">
-                        <div class="card-body text-center">
-                            <img src="https://cdn.ondefoc.dz/wp-content/uploads/2024/01/22.png.webp" class="img-fluid" alt="logo-saidal">
-                        </div>
-                    </div>
-                </div>
-
-
-
-                <div class="col-lg-2 col-md-3 col-sm-6 col-12">
-                    <div class="card rounded-4">
-                        <div class="card-body text-center">
-                            <img src="https://cdn.ondefoc.dz/wp-content/uploads/2024/01/16-1.png.webp" class="img-fluid" alt="logo-saidal">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-2 col-md-3 col-sm-6 col-12">
-                    <div class="card rounded-4">
-                        <div class="card-body text-center">
-                            <img src="https://cdn.ondefoc.dz/wp-content/uploads/2024/01/1-1.png.webp" class="img-fluid" alt="logo-saidal">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-2 col-md-3 col-sm-6 col-12">
-                    <div class="card rounded-4">
-                        <div class="card-body text-center">
-                            <img src="https://cdn.ondefoc.dz/wp-content/uploads/2024/01/3-1.png.webp" class="img-fluid" alt="logo-saidal">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-2 col-md-3 col-sm-6 col-12">
-                    <div class="card rounded-4">
-                        <div class="card-body text-center">
-                            <img src="https://cdn.ondefoc.dz/wp-content/uploads/2024/01/7-1.png.webp" class="img-fluid" alt="logo-saidal">
-                        </div>
-                    </div>
-                </div>
-
             </div>
+
 
         </div>
     </section>
+
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+
+
+    <!-- Initialize Swiper -->
+    <script>
+        var swiper = new Swiper(".banks", {
+            slidesPerView: 3,
+
+            loop: true,
+            centeredSlides: true,
+            autoplay: {
+                delay: 1500,
+                disableOnInteraction: true,
+            },
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+        });
+    </script>
+
 
     <script>
 
@@ -204,6 +123,8 @@
                 navBarBtn.classList.add('btn-primary');
             }
         }
+
+
 
     </script>
 

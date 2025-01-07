@@ -61,7 +61,141 @@ class   SiteController extends Controller
 
    public function home()
    {
-       return view('index');
+       $prefix = 'images/banks/';
+       $banks = [
+           [
+               "url" => "https://www.poste.dz/",
+               "title" => "",
+               "alt" => "03-ALP.png",
+               "image" => asset($prefix . 'algerie.svg')
+           ],
+           [
+               "url" => "https://www.bna.dz/fr/",
+               "title" => "",
+               "alt" => "09-BNA.png",
+               "image" => asset($prefix . 'bna.svg')
+           ],
+           [
+               "url" => "https://www.cpa-bank.dz/index.php/fr/",
+               "title" => "",
+               "alt" => "12-CPA.png",
+               "image" => asset($prefix . 'cpa.svg')
+           ],
+           [
+               "url" => "https://ebank.cnepbanque.dz/Services",
+               "title" => "",
+               "alt" => "11-CNEP.png",
+               "image" => asset($prefix . 'cnep.svg')
+           ],
+
+           [
+               "url" => "https://www.bea.dz/",
+               "title" => "",
+               "alt" => "08-BEA.png",
+               "image" => asset($prefix . 'bea.svg')
+           ],
+           [
+               "url" => "https://www.bnpparibas.dz/",
+               "title" => "",
+               "alt" => "BNP",
+               "image" => asset($prefix . 'bnp.svg')
+           ],
+
+           [
+               "url" => "https://fransabank.dz/",
+               "title" => "",
+               "alt" => "13-FSB.png",
+               "image" => asset($prefix . 'fransabank.png')
+           ],
+           [
+               "url" => "https://www.agb.dz/",
+               "title" => "",
+               "alt" => "14-AGB.png",
+               "image" => asset($prefix . 'agb.png')
+           ],
+           [
+               "url" => "https://www.housingbankdz.com/index.php/fr/",
+               "title" => "",
+               "alt" => "15-HSB.png",
+               "image" => asset($prefix . 'hba.png')
+           ],
+           [
+               "url" => "https://www.natixis.dz/",
+               "title" => "",
+               "alt" => "16-NTX.png",
+               "image" => asset($prefix . 'natixis.png')
+           ],
+           [
+               "url" => "https://societegenerale.dz/",
+               "title" => "",
+               "alt" => "17-SGA.png",
+               "image" => asset($prefix . 'societegenerale.svg')
+           ],
+           [
+               "url" => "https://www.trustbank.dz/",
+               "title" => "",
+               "alt" => "18-TRUST.png",
+               "image" => asset($prefix . 'trust.svg')
+           ],
+           [
+               "url" => "https://www.albaraka-bank.com/",
+               "title" => "",
+               "alt" => "01-ALBARAKA.png",
+               "image" => asset($prefix . 'albaraka.svg')
+           ],
+           [
+               "url" => "https://www.alsalamalgeria.com/fr",
+               "title" => "",
+               "alt" => "02-ASB.png",
+               "image" => asset($prefix . 'alsalam.svg')
+           ],
+           [
+               "url" => "http://www.arabbank.dz/",
+               "title" => "",
+               "alt" => "04-ABA.png",
+               "image" => asset($prefix . 'arabbank.svg')
+           ],
+           [
+               "url" => "https://www.bank-abc.com/world/Algeria/Fr",
+               "title" => "",
+               "alt" => "05-ABC.png",
+               "image" => asset($prefix . 'abc.svg')
+           ],
+           [
+               "url" => "https://oneday-web.com/joomla/images/BDL.png",
+               "title" => "",
+               "alt" => "06-BDL.png",
+               "image" => asset($prefix . 'bdl.png')
+           ],
+           [
+               "url" => "https://badrbanque.dz/",
+               "title" => "",
+               "alt" => "07-BADR.png",
+               "image" => asset($prefix . 'badr.svg')
+           ],
+
+
+       ];
+
+       $features = [
+           [
+               "title" => "إختر منتجك",
+               "alt" => "online-cart",
+               "image" => asset('images/online-cart.svg')
+           ],
+           [
+               "title" => "أدخل بطاقتك",
+               "alt" => "user-card",
+               "image" => asset('images/user-card.svg')
+           ],
+           [
+               "title" => "حمل وصلك",
+               "alt" => "recu-online",
+               "image" => asset('images/recu-enline.svg')
+           ],
+       ];
+
+       return view('index',compact('banks','features'));
    }
 
    public function conditions()
