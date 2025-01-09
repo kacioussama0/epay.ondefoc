@@ -4,9 +4,12 @@
 @section('title','الدفع الإلكتروني')
 
 
+@section('styles')
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+@endsection
+
 @section('content')
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
     <section class="landing-page d-flex flex-column justify-content-center align-items-center position-relative z-3 vh-100 overflow-hidden">
 
@@ -80,6 +83,13 @@
     </section>
 
 
+
+@endsection
+
+
+@section('scripts')
+
+
     <!-- Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
@@ -124,9 +134,6 @@
             }
         }
 
-
-
     </script>
 
 @endsection
-

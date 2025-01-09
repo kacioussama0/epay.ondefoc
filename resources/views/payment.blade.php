@@ -3,7 +3,54 @@
 
 @section('title','صفحة الدفع')
 
+@section('meta')
 
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:type" content="product">
+    <meta property="og:title" content="{{$product->name}}">
+    <meta property="og:description" content="{{$product->description}}">
+    <meta property="og:url" content="{{url('/products/' . $product->slug)}}">
+    <meta property="og:image" content="{{$product->image ? asset('storage/' . $product->image) : asset('images/Ondefoc Purple.svg')}}">
+    <meta property="og:site_name" content="{{config('app.title')}}">
+    <meta property="og:locale" content="{{config('app.locale')}}">
+
+    <!-- Optional Open Graph Product Tags -->
+    <meta property="product:price:amount" content="{{$product->sale_price ? number_format($product->sale_price,2,'.','') : number_format($product->price,2,'.','')}}">
+    <meta property="product:price:currency" content="DZD">
+    <meta property="product:availability" content="in stock"> <!-- Use "in stock", "out of stock", or "preorder" -->
+    <meta property="product:brand" content="Ondefoc">
+    <meta property="product:category" content="{{$product->category->name}}">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{$product->name}}">
+    <meta name="twitter:description" content="{{$product->description}}">
+    <meta name="twitter:image" content="{{$product->image ? asset('storage/' . $product->image) : asset('images/Ondefoc Purple.svg')}}">
+
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org/",
+            "@type": "Product",
+            "name": "{{$product->name}}",
+            "image": [
+                "{{$product->image ? asset('storage/' . $product->image) : asset('images/Ondefoc Purple.svg')}}"
+            ],
+            "description": "{{$product->description}}",
+            "brand": {
+                "@type": "Brand",
+                "name": "Ondefoc"
+            },
+            "offers": {
+                "@type": "Offer",
+                "url": "{{url('/products/' . $product->slug)}}",
+                "priceCurrency": "DZD",
+                "price": "{{$product->sale_price ? number_format($product->sale_price,2,'.','') : number_format($product->price,2,'.','')}}",
+                "availability": "https://schema.org/InStock"
+            }
+        }
+    </script>
+
+@endsection
 
 @section('content')
 
@@ -21,7 +68,7 @@
                 </div>
 
                 <div class="col-md-6">
-                    <img src="{{$product->image ? asset('storage/' . $product->image) : asset('images/Ondefoc Purple.svg')}}" alt="logo" class="object-fit-contain w-100">
+                    <img src="{{$product->image ? asset('storage/' . $product->image) : asset('images/Ondefoc Purple.svg')}}" alt="product-{{$product->slug}}" class="object-fit-contain w-100">
                 </div>
 
 
@@ -90,42 +137,23 @@
 
                                 <form action="{{route('payment',$product->slug)}}" method="POST">
                                     @csrf
-                                    <div class="row g-3">
+                                    <div class="row">
 
                                         <div class="col-md-6">
-                                            <label for="full_name">الإسم واللقب</label>
-                                            <input type="text" class="form-control" name="customer_name" value="{{old('customer_name')}}">
-                                            @error('customer_name')
-                                            <span class="text-danger">{{$message}}</span>
-                                            @enderror
+                                            <x-form-input type="text" name="customer_name" label="الإسم واللقب" value="{{old('customer_name')}}" required="true"/>
                                         </div>
 
                                         <div class="col-md-6">
-                                            <label for="full_name">الشركة (إختياري)</label>
-                                            <input type="text" class="form-control"  name="customer_enterprise" value="{{old('customer_enterprise')}}">
-                                            @error('customer_enterprise')
-                                            <span class="text-danger">{{$message}}</span>
-                                            @enderror
+                                            <x-form-input type="text" name="customer_enterprise" label="الشركة (إختياري)" value="{{old('customer_enterprise')}}"/>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <x-form-input type="email" name="email" label="البريد الإلكتروني" value="{{old('email')}}"  required="true"/>
                                         </div>
 
 
                                         <div class="col-md-6">
-                                            <label for="email">البريد الإلكتروني</label>
-                                            <input type="text" class="form-control" name="email" value="{{old('email')}}">
-                                            @error('email')
-                                            <span class="text-danger">{{$message}}</span>
-                                            @enderror
-                                        </div>
-
-
-                                        <div class="col-md-6">
-
-                                            <label for="full_name">رقم الهاتف</label>
-                                            <input type="text" name="phone" class="form-control" value="{{old('phone')}}">
-                                            @error('phone')
-                                            <span class="text-danger">{{$message}}</span>
-                                            @enderror
-
+                                            <x-form-input type="text" name="phone" label="رقم الهاتف" value="{{old('phone')}}"  required="true"/>
                                         </div>
 
 
@@ -138,11 +166,10 @@
                                         </div>
 
 
-                                        <div class="g-recaptcha mt-3" data-sitekey="6LeyrZMqAAAAAHxqDz3uhMH7KNcR1LItx4uFXehB"></div>
+                                        <div class="g-recaptcha my-3" data-sitekey="6LeyrZMqAAAAAHxqDz3uhMH7KNcR1LItx4uFXehB"></div>
                                         @error('g-recaptcha-response')
                                         <span class="text-danger">{{$message}}</span>
                                         @enderror
-
 
                                         <button type="submit" class="btn btn-primary">
                                             <img src="{{asset('images/cib.svg')}}" alt="CIB" width="30" class="ms-1">
@@ -173,6 +200,12 @@
 
             </div>
 
+
+            <script>
+
+
+
+            </script>
 
     </section>
 

@@ -1,4 +1,4 @@
-<footer class="text-bg-primary py-5 border-top border-5 border-dark-subtle">
+    <footer class="text-bg-primary py-5 border-top border-5 border-dark-subtle">
 
     <div class="container">
 
@@ -40,11 +40,11 @@
                     <div class="col-md-6">
 
                         <div class="social-media hstack justify-content-center justify-content-md-start mb-3 mb-md-0 gap-3">
-                            <a href="#" class="text-light text-decoration-none fs-4"><i class="bi bi-facebook"></i></a>
-                            <a href="#" class="text-light text-decoration-none fs-4"><i class="bi bi-youtube"></i></a>
-                            <a href="#" class="text-light text-decoration-none fs-4"><i class="bi bi-twitter-x"></i></a>
-                            <a href="#" class="text-light text-decoration-none fs-4"><i class="bi bi-linkedin"></i></a>
-                            <a href="#" class="text-light text-decoration-none fs-4"><i class="bi bi-instagram"></i></a>
+                            <a href="https://www.facebook.com/ondefoc?locale=fr_FR" class="text-light text-decoration-none fs-4" target="_blank"><i class="bi bi-facebook"></i></a>
+                            <a href="https://www.youtube.com/@ondefoc" class="text-light text-decoration-none fs-4" target="_blank"><i class="bi bi-youtube"></i></a>
+                            <a href="https://twitter.com/search?q=ondefoc&src=typed_query" class="text-light text-decoration-none fs-4" target="_blank"><i class="bi bi-twitter-x"></i></a>
+                            <a href="https://www.linkedin.com/search/results/all/?fetchDeterministicClustersOnly=true&heroEntityKey=urn%3Ali%3Aorganization%3A13053710&keywords=ondefoc&origin=RICH_QUERY_SUGGESTION&position=0&searchId=4497d58b-8d54-480d-91e3-5d6249a2784b&sid=5uY&spellCorrectionEnabled=false" target="_blank" class="text-light text-decoration-none fs-4"><i class="bi bi-linkedin"></i></a>
+                            <a href="https://www.instagram.com/ondefoc_formation_continue/" class="text-light text-decoration-none fs-4" target="_blank"><i class="bi bi-instagram"></i></a>
                         </div>
 
                     </div>

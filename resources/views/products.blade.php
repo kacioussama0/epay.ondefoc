@@ -3,6 +3,8 @@
 
 @section('title','المنتجات')
 
+
+
 @section('scripts')
 
     <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>

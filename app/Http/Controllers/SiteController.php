@@ -7,8 +7,8 @@ use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\URL;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use Illuminate\Support\Str;
 
 class   SiteController extends Controller
 {
@@ -227,7 +227,19 @@ class   SiteController extends Controller
         return false;
     }
 
-   public function order(Request $request,$slug)
+    function generateOrderNumber($productSKU)
+    {
+
+        $sku = strtoupper(substr($productSKU, 0, 4));
+
+        $timestamp = base_convert(time(), 10, 36);
+
+        $random = Str::random(10 - strlen($sku . $timestamp));
+
+        return substr(strtoupper($sku . $timestamp . $random), 0, 10);
+    }
+
+    public function order(Request $request,$slug)
    {
 
 
@@ -267,8 +279,7 @@ class   SiteController extends Controller
            "return_url" => url('/payment/callback'),
        ];
 
-       $orderId = $product->sku . str_pad($lastId, 6, "0", STR_PAD_LEFT);
-
+       $orderId = $this->generateOrderNumber($product->sku);
 
        $jsonParams = [
            'force_terminal_id' => config('app.satim.terminal_id'),
