@@ -71,7 +71,7 @@
                         <div class="card text-center rounded-4 border-0 shadow p-4">
                             <div class="card-body">
 
-                                <img src="{{$product->image ? asset('storage/' . $product->image) : asset('images/Ondefoc Purple.svg')}}" alt="logo" class="object-fit-contain w-100" height="250">
+                                <img src="{{$product->image ? asset('storage/' . $product->image) : asset('images/Ondefoc Purple.svg')}}" alt="logo" class="object-fit-contain w-100 mb-5" height="250">
 
                                 <h3 class="card-title text-truncate">{{$product->name}}</h3>
                                 <h6 class="card-subtitle mb-4 badge bg-dark">{{$product->category->name}}</h6>
