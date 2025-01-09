@@ -64,115 +64,107 @@ class   SiteController extends Controller
        $prefix = 'images/banks/';
        $banks = [
            [
-               "url" => "https://www.poste.dz/",
+               "url" => "https://epay.esaa.dz/wp-content/uploads/2022/01/Logos_banques_Trust.png",
                "title" => "",
-               "alt" => "03-ALP.png",
-               "image" => asset($prefix . 'algerie.svg')
+               "alt" => "Logos_banques_Trust",
+               "image" => asset($prefix . 'Logos_banques_Trust.png')
            ],
            [
-               "url" => "https://www.bna.dz/fr/",
+               "url" => "https://epay.esaa.dz/wp-content/uploads/2021/04/Logos_banques_Natixis.png",
                "title" => "",
-               "alt" => "09-BNA.png",
-               "image" => asset($prefix . 'bna.svg')
+               "alt" => "Logos_banques_Natixis",
+               "image" => asset($prefix . 'Logos_banques_Natixis.png')
            ],
            [
-               "url" => "https://www.cpa-bank.dz/index.php/fr/",
+               "url" => "https://epay.esaa.dz/wp-content/uploads/2022/01/sala2-1.png",
                "title" => "",
-               "alt" => "12-CPA.png",
-               "image" => asset($prefix . 'cpa.svg')
+               "alt" => "sala2",
+               "image" => asset($prefix . 'sala2-1.png')
            ],
            [
-               "url" => "https://ebank.cnepbanque.dz/Services",
+               "url" => "https://epay.esaa.dz/wp-content/uploads/2022/01/Logos_banques_AGB.png",
                "title" => "",
-               "alt" => "11-CNEP.png",
-               "image" => asset($prefix . 'cnep.svg')
-           ],
-
-           [
-               "url" => "https://www.bea.dz/",
-               "title" => "",
-               "alt" => "08-BEA.png",
-               "image" => asset($prefix . 'bea.svg')
+               "alt" => "Logos_banques_AGB",
+               "image" => asset($prefix . 'Logos_banques_AGB.png')
            ],
            [
-               "url" => "https://www.bnpparibas.dz/",
+               "url" => "https://epay.esaa.dz/wp-content/uploads/2022/01/Logos_banques_arab-bank.png",
                "title" => "",
-               "alt" => "BNP",
-               "image" => asset($prefix . 'bnp.svg')
-           ],
-
-           [
-               "url" => "https://fransabank.dz/",
-               "title" => "",
-               "alt" => "13-FSB.png",
-               "image" => asset($prefix . 'fransabank.png')
+               "alt" => "Logos_banques_arab-bank",
+               "image" => asset($prefix . 'Logos_banques_arab-bank.png')
            ],
            [
-               "url" => "https://www.agb.dz/",
+               "url" => "https://epay.esaa.dz/wp-content/uploads/2022/01/Logos_banques_badr.png",
                "title" => "",
-               "alt" => "14-AGB.png",
-               "image" => asset($prefix . 'agb.png')
+               "alt" => "Logos_banques_badr",
+               "image" => asset($prefix . 'Logos_banques_badr.png')
            ],
            [
-               "url" => "https://www.housingbankdz.com/index.php/fr/",
+               "url" => "https://epay.esaa.dz/wp-content/uploads/2022/01/Logos_banques_BDL.png",
                "title" => "",
-               "alt" => "15-HSB.png",
-               "image" => asset($prefix . 'hba.png')
+               "alt" => "Logos_banques_BDL",
+               "image" => asset($prefix . 'Logos_banques_BDL.png')
            ],
            [
-               "url" => "https://www.natixis.dz/",
+               "url" => "https://epay.esaa.dz/wp-content/uploads/2022/01/Logos_banques_BEA.png",
                "title" => "",
-               "alt" => "16-NTX.png",
-               "image" => asset($prefix . 'natixis.png')
+               "alt" => "Logos_banques_BEA",
+               "image" => asset($prefix . 'Logos_banques_BEA.png')
            ],
            [
-               "url" => "https://societegenerale.dz/",
+               "url" => "https://epay.esaa.dz/wp-content/uploads/2022/01/Logos_banques_BNA.png",
                "title" => "",
-               "alt" => "17-SGA.png",
-               "image" => asset($prefix . 'societegenerale.svg')
+               "alt" => "Logos_banques_BNA",
+               "image" => asset($prefix . 'Logos_banques_BNA.png')
            ],
            [
-               "url" => "https://www.trustbank.dz/",
+               "url" => "https://epay.esaa.dz/wp-content/uploads/2022/01/Logos_banques_BNP.png",
                "title" => "",
-               "alt" => "18-TRUST.png",
-               "image" => asset($prefix . 'trust.svg')
+               "alt" => "Logos_banques_BNP",
+               "image" => asset($prefix . 'Logos_banques_BNP.png')
            ],
            [
-               "url" => "https://www.albaraka-bank.com/",
+               "url" => "https://epay.esaa.dz/wp-content/uploads/2022/01/Logos_banques_CNEP.png",
                "title" => "",
-               "alt" => "01-ALBARAKA.png",
-               "image" => asset($prefix . 'albaraka.svg')
+               "alt" => "Logos_banques_CNEP",
+               "image" => asset($prefix . 'Logos_banques_CNEP.png')
            ],
            [
-               "url" => "https://www.alsalamalgeria.com/fr",
+               "url" => "https://epay.esaa.dz/wp-content/uploads/2022/01/Logos_banques_CPA.png",
                "title" => "",
-               "alt" => "02-ASB.png",
-               "image" => asset($prefix . 'alsalam.svg')
+               "alt" => "Logos_banques_CPA",
+               "image" => asset($prefix . 'Logos_banques_CPA.png')
            ],
            [
-               "url" => "http://www.arabbank.dz/",
+               "url" => "https://epay.esaa.dz/wp-content/uploads/2022/01/Logos_banques_elbaraka.png",
                "title" => "",
-               "alt" => "04-ABA.png",
-               "image" => asset($prefix . 'arabbank.svg')
+               "alt" => "Logos_banques_elbaraka",
+               "image" => asset($prefix . 'Logos_banques_elbaraka.png')
            ],
            [
-               "url" => "https://www.bank-abc.com/world/Algeria/Fr",
+               "url" => "https://epay.esaa.dz/wp-content/uploads/2022/01/Logos_banques_fransaBank.png",
                "title" => "",
-               "alt" => "05-ABC.png",
-               "image" => asset($prefix . 'abc.svg')
+               "alt" => "Logos_banques_fransaBank",
+               "image" => asset($prefix . 'Logos_banques_fransaBank.png')
            ],
            [
-               "url" => "https://oneday-web.com/joomla/images/BDL.png",
+               "url" => "https://epay.esaa.dz/wp-content/uploads/2022/01/Logos_banques_housing-Bank.png",
                "title" => "",
-               "alt" => "06-BDL.png",
-               "image" => asset($prefix . 'bdl.png')
+               "alt" => "Logos_banques_housing-Bank",
+               "image" => asset($prefix . 'Logos_banques_housing-Bank.png')
            ],
            [
-               "url" => "https://badrbanque.dz/",
+               "url" => "https://epay.esaa.dz/wp-content/uploads/2022/01/Logos_banques_HSBC.png",
                "title" => "",
-               "alt" => "07-BADR.png",
-               "image" => asset($prefix . 'badr.svg')
+               "alt" => "Logos_banques_HSBC",
+               "image" => asset($prefix . 'Logos_banques_HSBC.png')
            ],
+           [
+               "url" => "https://epay.esaa.dz/wp-content/uploads/2022/01/Logos_banques_SGA.png",
+               "title" => "",
+               "alt" => "Logos_banques_SGA",
+               "image" => asset($prefix . 'Logos_banques_SGA.png')
+           ]
 
 
        ];

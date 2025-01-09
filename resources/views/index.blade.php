@@ -6,6 +6,16 @@
 
 @section('styles')
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <style>
+
+        .swiper-image {
+            height: 250px;
+            background-size: 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+    </style>
 @endsection
 
 @section('content')
@@ -70,8 +80,8 @@
                 <div class="swiper-wrapper">
 
                     @foreach($banks as $bank)
-                        <div class="swiper-slide">
-                            <a href="{{$bank['url']}}" target="_blank"><img src="{{$bank['image']}}" class="object-fit-contain" alt="{{$bank['alt']}}" width="200" height="150"></a>
+                        <div class="swiper-slide d-flex justify-content-center align-items-center">
+                            <img src="{{$bank['url']}}" alt="" height="100" class="object-fit-contain text-center">
                         </div>
                     @endforeach
 
@@ -98,10 +108,11 @@
     <!-- Initialize Swiper -->
     <script>
         var swiper = new Swiper(".banks", {
-            slidesPerView: 3,
+
 
             loop: true,
             centeredSlides: true,
+
             autoplay: {
                 delay: 1500,
                 disableOnInteraction: true,
@@ -110,6 +121,15 @@
                 nextEl: ".swiper-button-next",
                 prevEl: ".swiper-button-prev",
             },
+            breakpoints: {
+                1200: {
+                    slidesPerView: 4,
+                    spaceBetween: 150,
+                },
+                530: {
+                    slidesPerView: 'auto',
+                }
+            }
         });
     </script>
 
