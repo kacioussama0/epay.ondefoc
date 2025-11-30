@@ -33,9 +33,9 @@
 
         <div class="container text-center" data-aos="fade-up">
 
-            <h1 class="mb-4 fw-bolder text-light display-4 lh-base">الدفع الإلكتروني في <span class="text-gradient">موقع الديوان الوطني لتطوير التكوين المتواصل</span> و ترقيته متوفر</h1>
+            <h1 class="mb-4 fw-bolder text-light display-4 lh-base">الدفع الإلكتروني في <span class="text-gradient">موقع الديوان</span> متوفر</h1>
             <p class="text-light w-75 mx-auto mb-4">قم بالدفع على موقع الديوان بكل أمان بإستعمال بطاقتك البنكية أو بطاقة أحد أقاربك. هذه المنصة متوفرة 7/7 أيام و 24/24 ساعة. و الدفع من خلالها يضمن معالجة ملفكم بسرعة.</p>
-            <a href="{{url('/products')}}" class="btn btn-lg btn-primary rounded-pill px-5">إدفع الأن</a>
+            <a href="{{url('/products')}}" class="btn btn-lg btn-primary rounded-pill px-5">إدفع الآن</a>
             <div class="d-flex align-items-center justify-content-center mt-4">
                 <img src="{{asset('images/cib.svg')}}" alt="CIB" width="80" class="me-4">
                 <img src="{{asset('images/AlgeriePoste.svg')}}" alt="Edahabia" width="80">
