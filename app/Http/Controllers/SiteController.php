@@ -277,7 +277,7 @@ class   SiteController extends Controller
 
        $orderId = $this->generateOrderNumber($product->sku);
 
-       dd($orderId);
+
 
        $jsonParams = [
            'force_terminal_id' => config('app.satim.terminal_id'),
@@ -300,6 +300,7 @@ class   SiteController extends Controller
 
        if ($response->successful()) {
            $validatedData['transaction_id'] = str_replace('mdOrder=','',parse_url($response->json()['formUrl'], PHP_URL_QUERY));
+           $validatedData['transaction_id'] = explode('&',$validatedData['transaction_id'])[0];
            $validatedData['orderNumber'] = $orderId;
            $validatedData['product_id'] = $product->id;
 
@@ -317,6 +318,7 @@ class   SiteController extends Controller
     public function callback(Request $request)
     {
         $orderId = $request->query('orderId');
+
         $this->confirmOrder($request,$orderId);
     }
 
@@ -332,10 +334,13 @@ class   SiteController extends Controller
             'language' => 'AR'
         ]);
 
+
         if($response->successful()) {
 
             $result = $response->json();
+
             $order = Order::where('transaction_id',$orderId)->first();
+
             $request->session()->put('tId', $orderId);
 
             if(isset($order)) {
