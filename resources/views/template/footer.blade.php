@@ -1,31 +1,31 @@
-    <footer class="text-bg-primary py-5 border-top border-5 border-dark-subtle">
+<footer class="text-bg-primary py-5 border-top border-5 border-dark-subtle">
 
     <div class="container">
 
-        <div class="row g-4 gx-md-5  text-md-start text-center ">
+        <div class="row g-4 gx-md-5  text-lg-start text-center ">
 
 
-            <div class="col-md-4">
-                <img src="{{asset('images/Ondefoc White.svg')}}" alt="" height="50" class="mb-5">
+            <div class="col-lg-4">
+                <img src="{{asset('images/logo-white.svg')}}" alt="" height="55" class="mb-3">
 
                 <p class="lh-lg">مؤسسة عمومية ذات طابع صناعي وتجاري تحت وصاية وزارة التكوين والتعليم المهنيين متخصص بالتكوين المتواصل والدراسات والاستشارة وتقديم المساعدة للشركات والمؤسسات العمومية والخاصة.</p>
             </div>
 
-            <div class="col-md-4" >
+            <div class="col-lg-4" >
 
                 <h4 class="mb-5">جهات الاتصال</h4>
 
                 <ul class="list-unstyled vstack gap-3">
-                    <li><i class="bi bi-calendar-check-fill me-2"></i>الأحد – الخميس : 16.00am 6.00pm</li>
-                    <li><i class="bi bi-geo-alt-fill me-2"></i>الطريق رقم 1 مدرار حسان – الرويبة 16012 الجزائر</li>
-                    <li><i class="bi bi-phone-fill me-2"></i><span dir="ltr">023 86 27 83</span></li>
-                    <li><i class="bi bi-envelope-fill me-2"></i>epay@ondefoc.dz</li>
+                    <li><i class="bi bi-calendar-check me-2"></i>الأحد – الخميس : 16:00AM - 8:00 PM</li>
+                    <li><i class="bi bi-geo-alt me-2"></i>الطريق رقم 1 مدرار حسان – الرويبة 16017 الجزائر</li>
+                    <li><i class="bi bi-phone me-2"></i><span dir="ltr">023 86 27 83</span></li>
+                    <li><i class="bi bi-envelope me-2"></i>epay@ondefoc.dz</li>
                 </ul>
 
             </div>
 
 
-            <div class="col-md-4">
+            <div class="col-lg-4">
 
                 <h4 class="mb-5">الخريطة</h4>
 
@@ -33,13 +33,13 @@
 
             </div>
 
-            <div class="col-md-12 mt-5">
+            <div class="col-lg-12 mt-5">
 
-                <div class="row">
+                <div class="row gy-3">
 
-                    <div class="col-md-6">
+                    <div class="col-lg-6">
 
-                        <div class="social-media hstack justify-content-center justify-content-md-start mb-3 mb-md-0 gap-3">
+                        <div class="social-media hstack justify-content-center justify-content-lg-start mb-3 mb-md-0 gap-3">
                             <a href="https://www.facebook.com/ondefoc?locale=fr_FR" class="text-light text-decoration-none fs-4" target="_blank"><i class="bi bi-facebook"></i></a>
                             <a href="https://www.youtube.com/@ondefoc" class="text-light text-decoration-none fs-4" target="_blank"><i class="bi bi-youtube"></i></a>
                             <a href="https://twitter.com/search?q=ondefoc&src=typed_query" class="text-light text-decoration-none fs-4" target="_blank"><i class="bi bi-twitter-x"></i></a>
@@ -49,7 +49,7 @@
 
                     </div>
 
-                    <div class="col-md-6">
+                    <div class="col-lg-6 text-center text-lg-end ">
                         <p class="mb-0">كل الحقوق محفوظة الديوان الوطني لتطوير التكوين المتواصل و ترقيته &copy; {{date("Y")}}</p>
                     </div>
 

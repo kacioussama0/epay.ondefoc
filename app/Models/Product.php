@@ -35,4 +35,10 @@ class Product extends Model
 
         return number_format($total,2,'.','');
     }
+
+    public function getReductionRateAttribute() {
+        $result = $this->attributes['price'] - $this->attributes['sale_price'];
+        $rate = ($result / $this->attributes['price']) * 100;
+        return number_format($rate,2,'.','');
+    }
 }

@@ -235,7 +235,11 @@ class   SiteController extends Controller
    {
 
 
-       $lastRecord = Order::latest('id')->select('id')->first()->id;
+
+       $lastRecord = Order::latest('id')->select('id')->first();
+
+
+       $lastRecord = (isset($lastRecord)) ? $lastRecord->id : 1;
 
        $lastId = $lastRecord ? $lastRecord + 1 : 1;
 
@@ -273,6 +277,8 @@ class   SiteController extends Controller
 
        $orderId = $this->generateOrderNumber($product->sku);
 
+       dd($orderId);
+
        $jsonParams = [
            'force_terminal_id' => config('app.satim.terminal_id'),
            'udf1' => $orderId
@@ -280,7 +286,7 @@ class   SiteController extends Controller
 
        $satimInfo["jsonParams"] = json_encode($jsonParams);
 
-       $response = Http::get("https://test.satim.dz/payment/rest/register.do",[
+       $response = Http::get("https://cib.satim.dz/payment/rest/register.do",[
            "userName" => $satimInfo['username'],
            "password" => $satimInfo['password'],
            "orderNumber" => $orderId,
@@ -319,7 +325,7 @@ class   SiteController extends Controller
     {
         $userIP = $_SERVER['REMOTE_ADDR'];
 
-        $response = Http::get('https://test.satim.dz/payment/rest/confirmOrder.do', [
+        $response = Http::get('https://cib.satim.dz/payment/rest/confirmOrder.do', [
             'orderId' => $orderId,
             'userName'=> config('app.satim.username'),
             'password'=> config('app.satim.password'),

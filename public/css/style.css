@@ -1,5 +1,5 @@
 body {
-    font-family: "IBM Plex Sans Arabic", sans-serif;
+    font-family: "Cairo", sans-serif;
 }
 
 
@@ -31,10 +31,14 @@ section.landing-page .overlay {
     position: absolute;
     top: 0;
     left: 0;
-    backdrop-filter: blur(2px);
+
     opacity: .3;
     z-index: -1;
     background-image: radial-gradient(circle, #7d133b, #892047, #952c52, #a0385f, #ac436b);
+}
+
+section.landing-page video {
+    filter: blur(5px);
 }
 
 .text-gradient {

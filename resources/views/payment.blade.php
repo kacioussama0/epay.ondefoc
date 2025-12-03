@@ -63,12 +63,12 @@
 
 
                 <div class="col-md-6">
-                    <h2 class="mb-4 display-2 fw-bolder">{{$product->name}}</h2>
-                    <p>{{$product->description}}</p>
+                    <h2 class="mb-5 fw-bolder">{{$product->name}}</h2>
+                    <p>{!!  nl2br($product->description)!!}</p>
                 </div>
 
                 <div class="col-md-6">
-                    <img src="{{$product->image ? asset('storage/' . $product->image) : asset('images/Ondefoc Purple.svg')}}" alt="product-{{$product->slug}}" class="object-fit-contain w-100">
+                    <img src="{{$product->image ? asset('storage/' . $product->image) : asset('images/Ondefoc Purple.svg')}}" alt="product-{{$product->slug}}" class="object-fit-contain rounded-5 w-100">
                 </div>
 
 

@@ -1,9 +1,34 @@
 @extends('template.app')
 
 
-@section('title','المنتجات')
+@section('title','خدماتنا')
+
+@section('styles')
+
+    <style>
 
 
+        .truncate-2-lines {
+            display: -webkit-box;
+            -webkit-line-clamp: 2; /* Number of lines to show */
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+
+        .card {
+            transition: .3s ease-in-out;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px 0 var(--bs-primary-bg-subtle) !important;
+        }
+
+    </style>
+
+@endsection
 
 @section('scripts')
 
@@ -63,40 +88,55 @@
                 @endforeach
             </div>
 
-            <div class="row g-4 products">
+            <div class="row g-5 products">
 
                 @foreach($products as $product)
 
-                    <div class="col-lg-4 products-item category-{{$product->category->id}}">
-                        <div class="card text-center rounded-4 border-0 shadow p-4">
-                            <div class="card-body">
+                    <div class="col-md-6 col-lg-4  products-item category-{{$product->category->id}}">
+                        <div class="card rounded-5 overflow-hidden shadow-sm border-primary border-1 " style="background-image: url("{{$product->image ? asset('storage/' . $product->image) : asset('images/Ondefoc Purple.svg')}}")">
+                            <div class="card-header border-primary p-0 position-relative">
 
-                                <img src="{{$product->image ? asset('storage/' . $product->image) : asset('images/Ondefoc Purple.svg')}}" alt="logo" class="object-fit-contain w-100 mb-5" height="250">
+                                <span class="badge text-bg-danger position-absolute end-0 top-0 rounded-pill mt-3 me-3" dir="ltr">- {{$product->reduction_rate}} %</span>
 
-                                <h3 class="card-title text-truncate">{{$product->name}}</h3>
-                                <h6 class="card-subtitle mb-4 badge bg-dark">{{$product->category->name}}</h6>
-                                <br>
-
-                                <i class="bi bi-cash text-success fs-5 me-1"></i>
-
-                                @isset($product->sale_price)
-                                    <span class="text-success mb-5 fs-5 fw-bold me-2">{{ number_format($product->sale_price,2,'.','')}} د.ج </span>
-                                    <del class="text-danger mb-5 fs-5 fw-bold">{{ number_format($product->price,2,'.','')}} د.ج </del>
-                                @else
-                                    <span class="text-success mb-5 fs-5 fw-bold">{{ number_format($product->price,2,'.','')}} د.ج </span>
-                                @endisset
-                                <br>
-                                <br>
-
-                                <h4 class="mb-4"><i class="bi bi-calculator me-1"></i>غير شامل الضريبة</h4>
-
-                                <a href="{{url('/products/' . $product->slug)}}" class="card-link btn btn-lg btn-primary w-100">
-                                    <i class="bi bi-bag-fill me-2"></i>
-                                    إدفع الأن
-                                </a>
-
+                                <img src="{{$product->image ? asset('storage/' . $product->image) : asset('images/Ondefoc Purple.svg')}}" alt="logo" class="object-fit-cover w-100" height="250">
 
                             </div>
+                            <div class="card-body p-4">
+
+
+                                <h4 class="fw-bolder text-truncate">{{$product->name}}</h4>
+                                <h6 class="card-subtitle mb-4 badge bg-dark me-auto d-inline-block">{{$product->category->name}}</h6>
+
+                                <p class="card-text text-secondary truncate-2-lines">{{$product->description}}</p>
+
+
+
+                                 <div class="price d-flex align-items-center justify-content-between">
+
+                                     @isset($product->sale_price)
+                                         <span class="fs-5 fw-bold me-2 text-success">{{ number_format($product->sale_price,2,'.','')}} د.ج </span>
+                                         <del class="text-danger fs-5 fw-bold">{{ number_format($product->price,2,'.','')}} د.ج </del>
+                                     @else
+                                         <span class="fs-5 fw-bold">{{ number_format($product->price,2,'.','')}} د.ج </span>
+                                     @endisset
+
+                                 </div>
+
+
+                                    {{--                                <h4 class="mb-4"><i class="bi bi-calculator me-1"></i>دون احتساب الضريبة</h4>--}}
+
+                            </div>
+
+
+                            <div class="card-footer pb-3 bg-transparent border-0 d-flex justify-content-end align-items-center">
+
+                                <a href="{{url('/products/' . $product->slug)}}" style="width: 40px;height: 40px" class="stretched-link text-decoration-none btn rounded-circle p-2 d-inline-flex justify-content-center align-items-center btn-primary">
+                                    <i class="bi bi-bag"></i>
+                                </a>
+
+                            </div>
+
+
                         </div>
                     </div>
 
