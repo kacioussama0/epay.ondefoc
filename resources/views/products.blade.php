@@ -97,7 +97,7 @@
                             <div class="card-header border-primary p-0 position-relative">
 
 
-                                @if($product->reduction_rate <= 100 or $product->reduction_rate <= 0)
+                                @if($product->sale_price and ($product->reduction_rate < 100 and $product->reduction_rate > 0))
                                     <span class="badge text-bg-danger position-absolute end-0 top-0 rounded-pill mt-3 me-3" dir="ltr">- {{$product->reduction_rate}} %</span>
                                 @endif
                                 <img src="{{$product->image ? asset('storage/' . $product->image) : asset('images/Ondefoc Purple.svg')}}" alt="logo" class="object-fit-cover w-100" height="250">
@@ -109,11 +109,9 @@
                                 <h4 class="fw-bolder text-truncate">{{$product->name}}</h4>
                                 <h6 class="card-subtitle mb-4 badge bg-dark me-auto d-inline-block">{{$product->category->name}}</h6>
 
-                                <p class="card-text text-secondary truncate-2-lines">{{$product->description}}</p>
+                                <p class="card-text text-secondary truncate-2-lines" style="min-height: 48px">{{$product->description}}</p>
 
-
-
-                                 <div class="price d-flex align-items-center justify-content-between">
+                                <div class="price d-flex align-items-center justify-content-between">
 
                                      @isset($product->sale_price)
                                          <span class="fs-5 fw-bold me-2 text-success">{{ number_format($product->sale_price,2,'.','')}} د.ج </span>
@@ -125,16 +123,40 @@
                                  </div>
 
 
+
+
                                     {{--                                <h4 class="mb-4"><i class="bi bi-calculator me-1"></i>دون احتساب الضريبة</h4>--}}
 
                             </div>
 
 
-                            <div class="card-footer pb-3 bg-transparent border-0 d-flex justify-content-end align-items-center">
+                            <div class="card-footer pb-3 bg-transparent border-0 d-flex justify-content-between align-items-center">
 
                                 <a href="{{url('/products/' . $product->slug)}}" style="width: 40px;height: 40px" class="stretched-link text-decoration-none btn rounded-circle p-2 d-inline-flex justify-content-center align-items-center btn-primary">
                                     <i class="bi bi-bag"></i>
                                 </a>
+
+                                @if(!isset($product->stock))
+                                    <span class="text-success fw-bolder">
+                                        متاح
+                                    </span>
+                                @elseif(isset($product->stock) and $product->stock > 0)
+
+
+                                    <span class="text-warning fw-bolder">
+                                        متاح — تبقى {{$product->stock}} مقاعد
+                                    </span>
+
+
+
+                                @else
+
+
+                                    <span class="text-danger fw-bolder">
+                                        غير متاح
+                                    </span>
+
+                                @endif
 
                             </div>
 
