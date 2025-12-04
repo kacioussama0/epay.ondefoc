@@ -96,8 +96,10 @@
                         <div class="card rounded-5 overflow-hidden shadow-sm border-primary border-1 " style="background-image: url("{{$product->image ? asset('storage/' . $product->image) : asset('images/Ondefoc Purple.svg')}}")">
                             <div class="card-header border-primary p-0 position-relative">
 
-                                <span class="badge text-bg-danger position-absolute end-0 top-0 rounded-pill mt-3 me-3" dir="ltr">- {{$product->reduction_rate}} %</span>
 
+                                @if($product->reduction_rate <= 100 or $product->reduction_rate <= 0)
+                                    <span class="badge text-bg-danger position-absolute end-0 top-0 rounded-pill mt-3 me-3" dir="ltr">- {{$product->reduction_rate}} %</span>
+                                @endif
                                 <img src="{{$product->image ? asset('storage/' . $product->image) : asset('images/Ondefoc Purple.svg')}}" alt="logo" class="object-fit-cover w-100" height="250">
 
                             </div>

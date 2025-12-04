@@ -14,8 +14,15 @@ class FormInput extends Component
     public $attributes;
     public $required;
 
-    public function __construct($type = 'text', $name, $label = '', $options = [], $value = '', $attributes = [], $required = false)
-    {
+    public function __construct(
+        $name,
+        $type = 'text',
+        $label = '',
+        $options = [],
+        $value = '',
+        $attributes = [],
+        $required = false
+    ) {
         $this->type = $type;
         $this->name = $name;
         $this->label = $label;
@@ -23,7 +30,6 @@ class FormInput extends Component
         $this->value = $value;
         $this->attributes = $attributes;
         $this->required = $required;
-
     }
 
     public function render()
