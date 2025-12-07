@@ -33,9 +33,9 @@ section.landing-page .overlay {
     position: absolute;
     top: 0;
     left: 0;
-    opacity: .3;
+    opacity: .5;
     z-index: -1;
-    background-image: radial-gradient(circle, #7d133b, #892047, #952c52, #a0385f, #ac436b);
+    background-color: rgb(0,0,0);
 }
 
 section.landing-page video {
@@ -82,3 +82,7 @@ section.landing-page video {
     margin-left: 5px;
 }
 
+
+.rc-anchor-light.rc-anchor-normal, .rc-anchor-light.rc-anchor-compact {
+    border-color: ;
+}

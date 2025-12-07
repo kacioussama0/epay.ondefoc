@@ -391,7 +391,18 @@ class   SiteController extends Controller
 
     public function products()
    {
-       $products = Product::where('status','published')->orderBy('created_at','DESC')->get();
+       $products = Product::where('status', 'published')
+           ->orderByRaw('
+        CASE
+            WHEN stock = 0 THEN 3        -- out of stock → دائماً في الأخير
+            WHEN stock IS NULL THEN 2    -- null → يأتي بعد القيم >0
+            ELSE 1                       -- stock > 0 → في الأعلى
+        END
+    ')
+           ->orderBy('stock', 'DESC')
+           ->orderBy('created_at', 'DESC')
+           ->get();
+
        $categories = Category::all();
        return  view('products',compact('products','categories'));
 

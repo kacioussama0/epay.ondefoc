@@ -68,7 +68,7 @@
                 </div>
 
                 <div class="col-md-6">
-                    <img src="{{$product->image ? asset('storage/' . $product->image) : asset('images/Ondefoc Purple.svg')}}" alt="product-{{$product->slug}}" class="object-fit-contain rounded-5 w-100">
+                    <img src="{{$product->image ? asset('storage/' . $product->image) : asset('images/logo-colored.svg')}}" alt="product-{{$product->slug}}" class="object-fit-contain rounded-5 w-100">
                 </div>
 
 
@@ -79,22 +79,22 @@
     </section>
 
     <hr>
-
-    <section class="payment-content">
+    @if(empty($product->stock) || $product->stock > 0)
+        <section class="payment-content">
 
         <div class="container">
 
 
                 <div class="row g-md-5 justify-content-center align-items-center">
 
-                    <div class="col-lg-6   order-lg-0 order-1 text-center">
+                    <div class="col-lg-6   order-lg-1 order-0 text-center">
                         <img src="{{asset('images/Cartes_paiments.png')}}" alt="illustration payment" class="img-fluid">
                     </div>
 
-                    <div class="col-lg-6 py-5">
+                    <div class="col-lg-6  py-5">
 
 
-                        <div class="card border-0 rounded-4 shadow">
+                        <div class="card rounded-5 overflow-hidden shadow-sm border-primary border-1">
 
                             <div class="card-header p-4 bg-transparent">
 
@@ -208,6 +208,9 @@
             </script>
 
     </section>
+    @else
+        <h3 class="text-danger text-center my-5 display-3 fw-bolder">الدفع غير متاح</h3>
+    @endif
 
 @endsection
 
