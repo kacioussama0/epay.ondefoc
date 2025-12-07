@@ -3,7 +3,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark shadow-sm py-2 {{Request::url() == url('/') ? " bg-transparent" : "bg-primary"}}">
         <div class="container">
             <a class="navbar-brand text-sm-center" href="{{url('/')}}">
-                <img src="{{asset('images/logo-o-white.svg')}}" alt="" class="header-logo">
+                <img src="{{asset('/images/logo-o-white.svg')}}" alt="" class="header-logo">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="bi bi-three-dots-vertical"></span>
