@@ -6,7 +6,7 @@
 
 
             <div class="col-lg-4">
-                <img src="{{asset('images/logo-white.svg')}}" alt="" height="55" class="mb-3">
+                <img src="{{asset('images/logo-o-white.svg')}}" alt="" height="55" class="mb-3">
 
                 <p class="lh-lg">مؤسسة عمومية ذات طابع صناعي وتجاري تحت وصاية وزارة التكوين والتعليم المهنيين متخصص بالتكوين المتواصل والدراسات والاستشارة وتقديم المساعدة للشركات والمؤسسات العمومية والخاصة.</p>
             </div>

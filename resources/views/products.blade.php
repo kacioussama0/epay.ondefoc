@@ -88,7 +88,7 @@
                 @endforeach
             </div>
 
-            <div class="row g-5 products">
+            <div class="row gy-5 g-md-5 products">
 
                 @foreach($products as $product)
 

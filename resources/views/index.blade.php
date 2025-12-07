@@ -25,13 +25,12 @@
 
 
         <div class="video-overlay position-absolute top-50 start-50 translate-middle z-n1">
-            <video  src="{{asset('videos/bg.mp4')}}" class="h-100 object-fit-cover vh-100  vw-100" autoplay muted loop></video>
+            <video  src="{{asset('videos/bg.webm')}}" class="h-100 object-fit-cover vh-100  vw-100" autoplay muted loop preload="none"></video>
         </div>
 
         <div class="overlay z-n1"></div>
 
-
-        <div class="container text-center" data-aos="fade-up">
+        <div class="container text-center">
 
             <h1 class="mb-4 fw-bolder text-light display-4 lh-base">الدفع الإلكتروني في <span class="text-gradient">موقع الديوان</span> متوفر</h1>
             <p class="text-light w-75 mx-auto mb-4">قم بالدفع على موقع الديوان بكل أمان بإستعمال بطاقتك البنكية أو بطاقة أحد أقاربك. هذه المنصة متوفرة 7/7 أيام و 24/24 ساعة. و الدفع من خلالها يضمن معالجة ملفكم بسرعة.</p>
@@ -48,14 +47,16 @@
 
         <div class="container py-4">
 
-            <h3 class="display-4 fw-bold text-center mb-3" >قم بإجراء مدفوعاتك على موقعنا بسهولة وأمان.</h3>
-            <p class="fs-4 text-center fw-light mb-5" >لا ترغب في التنقل لدفع مستحقات الدورات أو الشهادات ؟ اكتشف هنا جميع الخطوات التي يجب اتباعها لإجراء المدفوعات عبر الإنترنت باستخدام بطاقة CIB أو الذهبية لبريد الجزائر.</p>
+
+            <h3 class="display-4 fw-bold text-center mb-4" data-aos="fade-up"  data-aos-duration="800">قم بإجراء مدفوعاتك على موقعنا بسهولة وأمان.</h3>
+            <h5 class="text-center fw-light mb-5" data-aos="fade-up" data-aos-duration="800">لا ترغب في التنقل لدفع مستحقات الدورات أو الشهادات ؟ اكتشف هنا جميع الخطوات التي يجب اتباعها لإجراء المدفوعات عبر الإنترنت باستخدام بطاقة CIB أو الذهبية لبريد الجزائر.</h5>
 
 
             <div class="row">
 
                 @foreach($features as $key => $feature)
-                    <div class="col-md-4 text-center" >
+                    <div class="col-md-4 text-center"  data-aos="fade-up"
+                         data-aos-duration="{{800 + ($key + 1) * 400}}">
                         <img src="{{$feature['image']}}" alt="icon-steps" width="200" class="mb-3">
                         <div class="d-flex align-items-center justify-content-center fw-bolder">
                             <span class="rounded-circle bg-primary text-light  fs-4 d-flex align-items-center justify-content-center text-center me-2" style="width: 40px;height: 40px">{{$key + 1}}</span>
@@ -70,13 +71,13 @@
 
     </section>
 
-    <section class="bg-primary-subtle py-5" >
+    <section class="bg-primary-subtle py-5"  data-aos="fade-up">
         <div class="container py-4">
             <h2 class="display-4 fw-bold text-center mb-3" data-aos="fade-down">الشبكة البنكية للدفع الإلكتروني</h2>
             <p class="fs-4 text-center fw-light mb-5" data-aos="fade-up">تدعم منصتنا الدفع الإلكتروني عبر شبكة البنوك المتصلة، مما يضمن تنفيذ المعاملات بسرعة وأمان، مع توفير خدمات التحويل والدفع عبر الإنترنت بشكل موثوق ومباشر.</p>
 
             <!-- Swiper -->
-            <div class="swiper banks py-3 my-5" data-aos="fade-up">
+            <div class="swiper banks py-3 my-5">
                 <div class="swiper-wrapper">
 
                     @foreach($banks as $bank)
