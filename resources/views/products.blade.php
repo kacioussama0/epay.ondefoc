@@ -114,7 +114,7 @@
                                 <div class="price d-flex align-items-center justify-content-between">
 
                                      @isset($product->sale_price)
-                                         <span class="fs-5 fw-bold me-2 text-success">{{ number_format($product->sale_price,2,'.','')}} د.ج </span>
+                                         <span class="fs-5 fw-bold me-2 text-success">{{ number_format($product->total_amount,2,'.','')}} د.ج </span>
                                          <del class="text-danger fs-5 fw-bold">{{ number_format($product->price,2,'.','')}} د.ج </del>
                                      @else
                                          <span class="fs-5 fw-bold">{{ number_format($product->price,2,'.','')}} د.ج </span>

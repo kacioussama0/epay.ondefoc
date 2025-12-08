@@ -25,7 +25,7 @@ Route::prefix('payment')->group(function () {
 
 Route::get('/products',[\App\Http\Controllers\SiteController::class,'products']);
 Route::get('/products/{slug}',[\App\Http\Controllers\SiteController::class,'product']);
-Route::post('/products/{slug}/payment',[\App\Http\Controllers\SiteController::class,'order'])->name('payment');
+Route::post('/products/{slug}/payment',[\App\Http\Controllers\PaymentController::class,'pay'])->name('payment');
 
 Route::prefix('admin')->middleware('auth')->group(function(){
     Route::resource('/orders',\App\Http\Controllers\OrderController::class);

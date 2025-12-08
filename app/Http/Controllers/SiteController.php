@@ -171,39 +171,6 @@ class   SiteController extends Controller
 
 
 
-    function verifyRecaptcha($responseKey, $userIP)
-    {
-        $url = 'https://www.google.com/recaptcha/api/siteverify';
-        $secretKey = config('app.recaptcha_key');
-
-        $data = [
-            'secret' => $secretKey,
-            'response' => $responseKey,
-            'remoteip' => $userIP,
-        ];
-
-        $response = Http::asForm()->post($url, $data);
-
-        $result = $response->json();
-
-        if (isset($result['success']) && $result['success']) {
-            return true;
-        }
-
-        return false;
-    }
-
-    function generateOrderNumber($productSKU)
-    {
-
-        $sku = strtoupper(substr($productSKU, 0, 4));
-
-        $timestamp = base_convert(time(), 10, 36);
-
-        $random = Str::random(10 - strlen($sku . $timestamp));
-
-        return substr(strtoupper($sku . $timestamp . $random), 0, 10);
-    }
 
     public function order(Request $request,$slug)
    {

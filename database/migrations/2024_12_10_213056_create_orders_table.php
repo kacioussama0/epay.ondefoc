@@ -13,13 +13,19 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
+            // Customer info
             $table->string('customer_name',128);
             $table->string('customer_enterprise')->nullable();
             $table->string('email',128);
             $table->string('phone',15);
+
+
+
+            // Product
             $table->unsignedBigInteger('product_id');
             $table->foreign('product_id')->references('id')
                 ->on('products')->onDelete('restrict')->onDelete('restrict');
+
             $table->string('transaction_id')->unique();
             $table->text('description')->nullable();
             $table->string('authorization_number')->nullable();
