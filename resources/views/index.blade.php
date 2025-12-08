@@ -15,6 +15,10 @@
             background-repeat: no-repeat;
         }
 
+        .swiper-wrapper {
+            transition-timing-function: linear !important;
+        }
+
     </style>
 @endsection
 
@@ -55,8 +59,8 @@
             <div class="row">
 
                 @foreach($features as $key => $feature)
-                    <div class="col-md-4 text-center"  data-aos="fade-up"
-                         data-aos-duration="{{800 + ($key + 1) * 400}}">
+                    <div class="col-md-4 text-center"  data-aos="fade-up-left"
+                         data-aos-duration="{{800 + ($key + 1) * 300}}">
                         <img src="{{$feature['image']}}" alt="icon-steps" width="200" class="mb-3">
                         <div class="d-flex align-items-center justify-content-center fw-bolder">
                             <span class="rounded-circle bg-primary text-light  fs-4 d-flex align-items-center justify-content-center text-center me-2" style="width: 40px;height: 40px">{{$key + 1}}</span>
@@ -71,18 +75,22 @@
 
     </section>
 
-    <section class="bg-primary-subtle py-5"  data-aos="fade-up">
+    <section class="bg-primary-subtle py-5">
         <div class="container py-4">
-            <h2 class="display-4 fw-bold text-center mb-3" data-aos="fade-down">الشبكة البنكية للدفع الإلكتروني</h2>
+            <h2 class="display-4 fw-bold text-center mb-3" data-aos="fade-up">الشبكة البنكية للدفع الإلكتروني</h2>
             <p class="fs-4 text-center fw-light mb-5" data-aos="fade-up">تدعم منصتنا الدفع الإلكتروني عبر شبكة البنوك المتصلة، مما يضمن تنفيذ المعاملات بسرعة وأمان، مع توفير خدمات التحويل والدفع عبر الإنترنت بشكل موثوق ومباشر.</p>
 
             <!-- Swiper -->
-            <div class="swiper banks py-3 my-5">
+            <div class="swiper banks py-3 my-5" data-aos="fade-up">
                 <div class="swiper-wrapper">
 
                     @foreach($banks as $bank)
                         <div class="swiper-slide d-flex justify-content-center align-items-center">
-                            <img src="{{$bank['url']}}" alt="" height="100" class="object-fit-contain text-center">
+                            <div class="card border-1 border-primary py-2 shadow-sm rounded-5" style="min-width: 260px">
+                                <div class="card-body d-flex justify-content-center align-items-center">
+                                    <img src="{{$bank['url']}}"  class="object-fit-contain" height="75" alt="{{$bank['alt']}}" >
+                                </div>
+                            </div>
                         </div>
                     @endforeach
 
@@ -108,30 +116,47 @@
 
     <!-- Initialize Swiper -->
     <script>
-        var swiper = new Swiper(".banks", {
-
-
+        const swiper = new Swiper(".banks", {
             loop: true,
-            centeredSlides: true,
+            loopAdditionalSlides: 20,
+            centeredSlides: false,
+
+            speed: 3000,
+
+            allowTouchMove: false,
 
             autoplay: {
-                delay: 1500,
-                disableOnInteraction: true,
+                delay: 1000,
+                disableOnInteraction: false,
+                pauseOnMouseEnter: false,
             },
-            navigation: {
-                nextEl: ".swiper-button-next",
-                prevEl: ".swiper-button-prev",
-            },
+
             breakpoints: {
                 1200: {
                     slidesPerView: 4,
-                    spaceBetween: 150,
+                    spaceBetween: 20,
                 },
-                530: {
+
+                900: {
+                    slidesPerView: 3,
+                    spaceBetween: 20,
+                },
+
+                700: {
+                    slidesPerView: 2,
+                    spaceBetween: 20,
+                },
+
+
+                200: {
                     slidesPerView: 'auto',
-                }
+                    spaceBetween: 20,
+                },
+
+
             }
         });
+
     </script>
 
 
