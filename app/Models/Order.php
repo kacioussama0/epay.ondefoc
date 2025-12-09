@@ -14,7 +14,7 @@ class Order extends Model
     }
 
 
-    public function getStatusAttribute($value)
+    public function getStatusBadgeAttribute($value)
     {
         return match ($value) {
             'Pending' => '<span class="badge text-bg-warning fw-bold">قيد الانتظار</span>',

@@ -31,7 +31,7 @@
 
         .receipt-header {
             height: 100px;
-            background: #6D1A3D;
+            background: #2D111F;
             color: #FFFFFF;
             margin-bottom: 20px;
             padding: 35px;
@@ -67,12 +67,12 @@
 
         .receipt-details .order-table tr th {
             font-size: 12px;
-            color: #6D1A3D;
+            color: #2D111F;
             text-align: left;
         }
 
         .order-table th,.order-table td {
-            border-right: 1px solid #6D1A3D;
+            border-right: 1px solid #2D111F;
             margin-top: 0;
             padding-left: 15px;
         }
@@ -92,12 +92,12 @@
         }
 
         .order-items thead th {
-            background: #6D1A3D;
+            background: #2D111F;
             color: #FFFFFF;
         }
 
         .order-items tbody th {
-            color: #6D1A3D;
+            color: #2D111F;
         }
 
         .order-items td, .order-items th {
@@ -116,7 +116,7 @@
         }
 
         .receipt-footer {
-            background: #6D1A3D;
+            background: #2D111F;
             color: #FFFFFF;
             padding: 35px;
         }
@@ -147,7 +147,7 @@
 <body>
 
 <div class="receipt-header">
-    <img src="{{public_path('images/Ondefoc White.svg')}}" alt="logo-ondefoc" height="60">
+    <img src="{{public_path('images/logo.jpg')}}" alt="logo-ondefoc" width="120">
     <span>Reçu de paiement</span>
 </div>
 
@@ -217,7 +217,7 @@
         </table>
 
         <div class="qr-container">
-            <img src="data:image/png;base64,{{ $qrCode }}" alt="code qr" id="qr-code">
+            <img src="data:image/png;base64,{{ $qrCode }}" width="120">
         </div>
 
         <div class="satim">

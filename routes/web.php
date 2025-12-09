@@ -17,9 +17,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 
 Route::prefix('payment')->group(function () {
-    Route::get('callback', [\App\Http\Controllers\SiteController::class, 'callback']);
-    Route::get('success', [\App\Http\Controllers\SiteController::class, 'success']);
-    Route::get('failed', [\App\Http\Controllers\SiteController::class, 'failed']);
+    Route::get('callback', [\App\Http\Controllers\PaymentController::class, 'callback']);
+    Route::get('result', [\App\Http\Controllers\PaymentController::class, 'result']);
     Route::get('check/{orderId}', [\App\Http\Controllers\OrderController::class, 'check']);
 });
 

@@ -42,17 +42,15 @@ class OrderController extends Controller
 
     public function generateQrCode($url)
     {
-        $imagePath = "/public/images/logo-qr.png";
-        $qrCode = QrCode::format('png') // Generate in PNG format
-        ->size(200) // Increase the size for better appearance
-        ->merge($imagePath, 0.15) // Add a logo, 20% of QR code size
-        ->margin(2) // Add a smaller margin for a clean look
-        ->color(109,26,61)
-            ->generate($url); // The content of the QR code
+        $qr = \SimpleSoftwareIO\QrCode\Facades\QrCode::format('png')
+            ->size(160)
+            ->margin(0)
+            ->errorCorrection('M')  // مهم
+            ->generate($url);
 
-        return base64_encode($qrCode);
-
+        return base64_encode($qr);
     }
+
 
     public function sendReceipt($orderId) {
 
@@ -107,7 +105,7 @@ class OrderController extends Controller
 
         $pdf = Pdf::loadView('receipt', $data);
 
-        return $pdf->download('receipt-'. $order->orderNumber .'.pdf');
+        return $pdf->stream('receipt-'. $order->orderNumber .'.pdf');
     }
 
 
