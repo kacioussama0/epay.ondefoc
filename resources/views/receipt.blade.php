@@ -131,7 +131,8 @@
             text-decoration: none;
         }
         .satim {
-            margin-top: 15px;
+            margin-top: 85px;
+            margin-bottom: 150px;
             text-align: center;
         }
 
@@ -184,7 +185,7 @@
 
                <thead>
                    <tr>
-                       <th style="border-right-color: #FFFFFF">Nom Complet</th>
+                       <th style="border-right-color: #FFFFFF">Nom complet</th>
                        <th colspan="2" style="border-right-color: #FFFFFF">Produit</th>
                    </tr>
                </thead>
@@ -215,6 +216,8 @@
                 </tbody>
 
         </table>
+
+        <br>
 
         <div class="qr-container">
             <img src="data:image/png;base64,{{ $qrCode }}" width="120">

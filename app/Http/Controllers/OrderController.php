@@ -42,13 +42,13 @@ class OrderController extends Controller
 
     public function generateQrCode($url)
     {
-        $qr = \SimpleSoftwareIO\QrCode\Facades\QrCode::format('png')
-            ->size(160)
-            ->margin(0)
-            ->errorCorrection('M')  // مهم
-            ->generate($url);
+        return base64_encode(
+            \SimpleSoftwareIO\QrCode\Facades\QrCode::format('png')
+                ->size(200)
+                ->margin(0)
 
-        return base64_encode($qr);
+                ->generate($url)
+        );
     }
 
 
@@ -82,10 +82,12 @@ class OrderController extends Controller
 
     public function generateReceipt($orderId)
     {
-        $order = Order::where('transaction_id',$orderId)->first();
+        $order = Order::where('transaction_id', $orderId)->first();
+        if (empty($order)) abort(404);
+
+
         $qrCode = $this->generateQrCode(url('/payment/check/' . $order->transaction_id));
 
-        if(empty($order)) abort(404);
 
         $data = [
             'transaction_id' => $order->transaction_id,
@@ -103,9 +105,10 @@ class OrderController extends Controller
             'qrCode' => $qrCode
         ];
 
-        $pdf = Pdf::loadView('receipt', $data);
 
-        return $pdf->stream('receipt-'. $order->orderNumber .'.pdf');
+        $pdf = Pdf::loadView('receipt', $data);
+        return $pdf->stream('receipt-' . $order->orderNumber . '.pdf');
+
     }
 
 
