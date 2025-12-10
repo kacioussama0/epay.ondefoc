@@ -30,11 +30,12 @@
 
 
         .receipt-header {
-            height: 100px;
+
             background: #2D111F;
             color: #FFFFFF;
             margin-bottom: 20px;
-            padding: 35px;
+            padding: 20px 0;
+            text-align: center;
         }
 
         .receipt-header img {
@@ -43,10 +44,10 @@
         }
 
         .receipt-header span {
-            font-weight: bold;
+            font-weight: bolder;
             display: inline-block;
             font-size: 40px;
-            margin-left: 170px;
+            /*margin-left: 170px;*/
         }
 
         .receipt {
@@ -131,8 +132,8 @@
             text-decoration: none;
         }
         .satim {
-            margin-top: 85px;
-            margin-bottom: 150px;
+            margin-top: 15px;
+
             text-align: center;
         }
 
@@ -148,7 +149,7 @@
 <body>
 
 <div class="receipt-header">
-    <img src="{{public_path('images/logo.jpg')}}" alt="logo-ondefoc" width="120">
+{{--    <img src="{{public_path('images')}}" alt="logo-ondefoc" width="120">--}}
     <span>Reçu de paiement</span>
 </div>
 
@@ -220,7 +221,7 @@
         <br>
 
         <div class="qr-container">
-            <img src="data:image/png;base64,{{ $qrCode }}" width="120">
+            <img src="{{ $qrCode }}" width="191">
         </div>
 
         <div class="satim">
@@ -236,7 +237,7 @@
 
 <div class="receipt-footer">
     <h3>Office National De Développement Et De Promotion De La Formation Continue</h3>
-    <p>Route n°1 MEDRAR Hacène – Rouiba 16012, Alger Algérie / 023 86 27 83</p>
+    <p>Route n°1 MEDRAR Hacène – Rouiba 16017, Alger Algérie / 023 86 27 83</p>
     <a href="https://www.ondefoc.dz">www.ondefoc.dz</a>
 </div>
 

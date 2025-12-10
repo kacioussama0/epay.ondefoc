@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Services\SatimService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
@@ -79,19 +80,19 @@ class PaymentController extends Controller
             'email' => 'required|email',
             'phone' => 'required|min:10|numeric',
             'agreed' => 'required',
-            'g-recaptcha-response' => [
-                function ($attribute, $value, $fail) use ($userIP) {
-                    if (!$this->verifyRecaptcha($value, $userIP))  {
-                        $fail('فشل التحقق من reCAPTCHA.');
-                    }
-                }
-            ]
+//            'g-recaptcha-response' => [
+//                function ($attribute, $value, $fail) use ($userIP) {
+//                    if (!$this->verifyRecaptcha($value, $userIP))  {
+//                        $fail('فشل التحقق من reCAPTCHA.');
+//                    }
+//                }
+//            ]
         ]);
 
         $orderNumber = $this->generateOrderNumber();
 
 
-        $register = $this->satim->registerPayment($orderNumber,$product->total_amount,$product->name,"AR",['udf1' => $product->SKU]);
+        $register = $this->satim->registerPayment($orderNumber,$product->total_amount,$product->name,"AR",['udf1' => $product->slug]);
 
 
         if($register['errorCode'] == 0){
@@ -216,18 +217,26 @@ class PaymentController extends Controller
     }
 
 
-    public function generateQrCode($url)
+    public static function generateQrCode($url)
     {
-        $imagePath = "/public/images/logo-qr.png";
-        $qrCode = QrCode::format('png') // Generate in PNG format
-        ->size(300) // Increase the size for better appearance
-        ->merge($imagePath, 0.15) // Add a logo, 20% of QR code size
-        ->margin(2) // Add a smaller margin for a clean look
-        ->color(109,26,61)
-            ->generate($url); // The content of the QR code
 
-        return base64_encode($qrCode);
+        $logoPath = '/public/images/logo.jpg';
 
+        $qrPng = QrCode::format('png')
+            ->size(300)
+            ->merge($logoPath, 0.15)
+            ->margin(2)
+            ->color(45, 17, 31)
+            ->generate($url);
+
+
+        $fileName = 'qr_' . uniqid() . '.png';
+
+
+        Storage::disk('public')->put('temp/' . $fileName, $qrPng);
+
+
+        return asset('storage/temp/' . $fileName);
     }
 
 

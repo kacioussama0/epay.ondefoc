@@ -166,7 +166,7 @@
                                         </div>
 
 
-                                        <div class="g-recaptcha my-3" data-sitekey="6LeyrZMqAAAAAHxqDz3uhMH7KNcR1LItx4uFXehB"></div>
+                                        <div class="g-recaptcha my-3" data-sitekey="6LdyKicsAAAAAHt5MkHrVcln31SfW5My3wuRuNgT"></div>
                                         @error('g-recaptcha-response')
                                         <span class="text-danger">{{$message}}</span>
                                         @enderror
@@ -189,8 +189,6 @@
                                 </div>
                             </div>
                         </div>
-
-
 
 
                     </div>

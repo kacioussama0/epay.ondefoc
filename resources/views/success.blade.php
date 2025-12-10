@@ -13,18 +13,18 @@
         <div class="container my-5 py-5">
 
 
-            <img src="{{asset('images/Ondefoc Purple.svg')}}" id="logo-print" class="d-none mx-auto mb-5" alt="logo-ondefoc" height="100">
+            <img src="{{asset('images/logo-o-colored.svg')}}" id="logo-print" class="d-none mx-auto mb-5" alt="logo-ondefoc" height="100">
 
 
 
 
-                        <div class="card shadow border-0 my-5 p-3">
+                        <div class="card rounded-5 overflow-hidden shadow-sm border-primary border-1 py-4">
 
                             <div class="card-header bg-transparent border-0">
 
                                 <x-success-mark/>
 
-                                <h1 class="fw-bolder text-success mb-5 display-2 d-flex justify-content-center align-items-center">{{$order->description}}</h1>
+                                <h1 class="fw-bolder text-success mb-5 d-flex justify-content-center align-items-center">{{$order->description}}</h1>
                             </div>
 
                             <div class="card-body">
@@ -32,7 +32,7 @@
                                 <x-alert/>
 
 
-                                <table class="table table-bordered">
+                                <table class="table table-bordered table-primary">
 
                                     <tr>
                                         <td>المنتج</td>
@@ -72,15 +72,15 @@
 
                                 <div class="btn-group d-flex justify-content-center align-items-center" role="group" aria-label="reciept-send-methods">
 
-                                    <a href="{{url('/receipt/' . $order->transaction_id)}}" class="btn btn-danger">
+                                    <a href="{{url('/receipt/' . $order->transaction_id)}}" class="btn btn-primary  border-start border-light">
                                         <i class="bi bi-file-pdf-fill ms-2"></i> PDF
                                     </a>
 
-                                    <button type="button" class="btn btn-success" onclick="window.print()" >
+                                    <button type="button" class="btn btn-primary  border-end border-light" onclick="window.print()" >
                                         <i class="bi bi-printer-fill ms-2"></i> طباعة
                                     </button>
 
-                                    <a href="{{url('/receipt/' . $order->transaction_id . '/email')}}" class="btn btn-warning">
+                                    <a href="{{url('/receipt/' . $order->transaction_id . '/email')}}" class="btn btn-primary border-start ">
                                         <i class="bi bi-envelope-fill ms-2"></i> بريد
                                     </a>
 
