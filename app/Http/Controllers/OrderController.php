@@ -5,8 +5,11 @@ namespace App\Http\Controllers;
 use App\Mail\ReceiptMail;
 use App\Models\Order;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class OrderController extends Controller
@@ -40,22 +43,12 @@ class OrderController extends Controller
 
     }
 
-    public function generateQrCode($url)
-    {
-        return base64_encode(
-            \SimpleSoftwareIO\QrCode\Facades\QrCode::format('png')
-                ->size(200)
-                ->margin(0)
-
-                ->generate($url)
-        );
-    }
 
 
     public function sendReceipt($orderId) {
 
         $order = Order::where('transaction_id',$orderId)->first();
-        $qrCode = $this->generateQrCode(url('/payment/check/' . $order->transaction_id));
+        $qrCode = PaymentController::generateQrCode(url('/payment/check/' . $order->transaction_id));
 
         if(empty($order)) abort(404);
 
@@ -80,13 +73,43 @@ class OrderController extends Controller
 
     }
 
+
+    protected function cleanupOldQrCodes()
+    {
+
+        $cutoff = now()->subMinutes(10);
+
+        $files = Storage::disk('public')->files('temp');
+
+        foreach ($files as $file) {
+            $lastModified = Storage::disk('public')->lastModified($file);
+
+            if (!$lastModified) {
+                continue;
+            }
+
+            $last = Carbon::createFromTimestamp($lastModified);
+
+            if ($last->lt($cutoff)) {
+                Storage::disk('public')->delete($file);
+            }
+        }
+    }
+
+
     public function generateReceipt($orderId)
     {
+
+        $this->cleanupOldQrCodes();
+
         $order = Order::where('transaction_id', $orderId)->first();
         if (empty($order)) abort(404);
 
 
-        $qrCode = $this->generateQrCode(url('/payment/check/' . $order->transaction_id));
+        $qrCode = PaymentController::generateQrCode(url('/payment/check/' . $order->transaction_id));
+
+        $qrFilePath = public_path(str_replace(asset(''), '', $qrCode));
+
 
 
         $data = [
@@ -95,14 +118,14 @@ class OrderController extends Controller
             'auth' => $order->authorization_number,
             'amount' => $order->amount,
             'tax_rate' => $order->product->tax_rate,
-            'total_amount' => $order->product->total_amount,
+            'total_amount' => $order->amount,
             'tva' => $order->product->tax_rate,
             'sale_amount' => $order->product->sale_price ? number_format( $order->product->sale_price,2,'.','') : number_format( $order->product->price,2,'.',''),
             'name' => $order->customer_name,
-            'product_sku' => $order->product->sku,
+            'product_sku' => Str::upper($order->product->slug),
             'status' => $order->status,
             'date' => $order->created_at->format('Y-m-d H:i:s'),
-            'qrCode' => $qrCode
+            'qrCode' => $qrFilePath
         ];
 
 

@@ -10,20 +10,40 @@
 
         .truncate-2-lines {
             display: -webkit-box;
-            -webkit-line-clamp: 2; /* Number of lines to show */
+            -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
             text-overflow: ellipsis;
         }
 
 
-        .card {
+        .card:not(.categories) {
             transition: .3s ease-in-out;
         }
 
-        .card:hover {
+        .card:hover:not(.categories) {
             transform: translateY(-2px);
             box-shadow: 0 5px 15px 0 var(--bs-primary-bg-subtle) !important;
+        }
+
+        .search-container {
+            position: relative;
+        }
+
+        .search-input {
+            height: 50px;
+            border-radius: 30px;
+            padding-left: 35px;
+            border: none;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-icon {
+            position: absolute;
+            top: 50%;
+            left: 15px;
+            transform: translateY(-50%);
+            color: #888;
         }
 
     </style>
@@ -81,19 +101,43 @@
         <div class="container">
 
 
-            <div class="btn-group btn-group-lg my-3 justify-content-center d-flex mb-5" role="group" aria-label="Products Filter Categories">
-                <button type="button" class="btn btn-primary"  data-filter="*">الكل</button>
-                @foreach($categories as $category)
-                    <button type="button" class="btn btn-outline-primary" data-filter=".category-{{$category->id}}">{{$category->name}}</button>
-                @endforeach
+            <div class="card rounded-5 overflow-hidden shadow-sm border-primary border-1 my-3 categories">
+
+
+                <div class="card-header px-4">
+                    <div class="row justify-content-center">
+                        <div class="col-md-6">
+                            <div class="search-container">
+                                <input type="text" class="form-control search-input" placeholder="البحث عن منتج أو خدمة">
+                                <i class="bi bi-search search-icon"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="card-body">
+
+                    <div class="btn-group btn-group-lg my-3 justify-content-center d-flex mb-5" role="group" aria-label="Products Filter Categories">
+                        <button type="button" class="btn btn-primary"  data-filter="*">الكل</button>
+                        @foreach($categories as $category)
+                            <button type="button" class="btn btn-outline-primary" data-filter=".category-{{$category->id}}">{{$category->name}}</button>
+                        @endforeach
+                    </div>
+
+                </div>
+
             </div>
 
-            <div class="row gy-5 g-md-5 products">
 
+
+
+            <div class="row gy-5 g-md-5 products">
+{{--                style="filter: grayscale({{isset($product->stock) && $product->stock == 0 ? 1 : 0}})"--}}
                 @foreach($products as $product)
 
                     <div class="col-md-6 col-lg-4  products-item category-{{$product->category->id}}">
-                        <div class="card rounded-5 overflow-hidden shadow-sm border-primary border-1 " style="filter: grayscale({{isset($product->stock) && $product->stock == 0 ? 1 : 0}})">
+                        <div class="card rounded-5 overflow-hidden shadow-sm border-primary border-1 ">
                             <div class="card-header border-primary p-0 position-relative">
 
 
@@ -107,7 +151,7 @@
 
 
                                 <h4 class="fw-bolder text-truncate">{{$product->name}}</h4>
-                                <h6 class="card-subtitle mb-4 badge bg-dark me-auto d-inline-block">{{$product->category->name}}</h6>
+                                <h6 class="card-subtitle mb-2 badge bg-dark me-auto d-inline-block">{{$product->category->name}}</h6>
 
                                 <p class="card-text text-secondary truncate-2-lines" style="min-height: 48px">{{$product->description}}</p>
 
@@ -117,16 +161,9 @@
                                          <span class="fs-5 fw-bold me-2 text-success">{{ number_format($product->total_amount,2,'.','')}} د.ج </span>
                                          <del class="text-danger fs-5 fw-bold">{{ number_format($product->price,2,'.','')}} د.ج </del>
                                      @else
-                                         <span class="fs-5 fw-bold">{{ number_format($product->price,2,'.','')}} د.ج </span>
+                                         <span class="fs-5 fw-bold">{{ number_format($product->total_amount,2,'.','')}} د.ج </span>
                                      @endisset
-
                                  </div>
-
-
-
-
-                                    {{--                                <h4 class="mb-4"><i class="bi bi-calculator me-1"></i>دون احتساب الضريبة</h4>--}}
-
                             </div>
 
 
@@ -137,14 +174,17 @@
                                 </a>
 
                                 @if(!isset($product->stock))
-                                    <span class="text-success fw-bolder">
+                                    <span class="text-bg-success rounded-5 p-2 f fw-bolder">
+                                        <i class="bi bi-bookmark-check-fill me-1"></i>
                                         متاح
                                     </span>
                                 @elseif(isset($product->stock) and $product->stock > 0)
 
 
-                                    <span class="text-warning fw-bolder">
-                                        متاح — تبقى {{$product->stock}} مقاعد
+                                    <span class="text-bg-warning rounded-5 p-2 fw-bolder">
+                                          <i class="bi bi-person-arms-up me-1"></i>
+                                          {{$product->stock}}
+                                          مقعد
                                     </span>
 
 
@@ -152,7 +192,8 @@
                                 @else
 
 
-                                    <span class="text-danger fw-bolder">
+                                    <span class="text-bg-danger rounded-5 p-2  fw-bolder">
+                                        <i class="bi bi-x-octagon-fill me-1"></i>
                                         غير متاح
                                     </span>
 

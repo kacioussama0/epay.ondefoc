@@ -1,6 +1,24 @@
 @extends('template.app')
 
 
+@section('styles')
+
+    <style>
+
+        .rc-anchor-light.rc-anchor-normal, .rc-anchor-light.rc-anchor-compact {
+            border: 1px solid var(--bs-primary) !important;
+        }
+
+        .rc-anchor-normal-footer {
+            display: none !important;
+        }
+
+    </style>
+
+
+@endsection
+
+
 @section('title','صفحة الدفع')
 
 @section('meta')
@@ -166,7 +184,7 @@
                                         </div>
 
 
-                                        <div class="g-recaptcha my-3" data-sitekey="6LeyrZMqAAAAAHxqDz3uhMH7KNcR1LItx4uFXehB"></div>
+                                        <div class="g-recaptcha my-3" data-sitekey="6LdyKicsAAAAAHt5MkHrVcln31SfW5My3wuRuNgT"></div>
                                         @error('g-recaptcha-response')
                                         <span class="text-danger">{{$message}}</span>
                                         @enderror
@@ -182,15 +200,13 @@
                             </div>
 
 
-                            <div class="card-footer bg-transparent">
+                            <div class="card-footer bg-transparent text-center">
                                 <div class="satim d-flex flex-column align-items-center">
-                                    <h5 class="fw-bold mb-3">في حال واجهتم مشكلة في الدفع SATIM</h5>
+                                    <h5 class="fw-bold mb-3 lh-sm">في حال واجهتم مشكلة في الدفع SATIM</h5>
                                     <img src="{{asset('images/numero-vert-satim.png')}}" class="w-50" alt="satim-green-number">
                                 </div>
                             </div>
                         </div>
-
-
 
 
                     </div>

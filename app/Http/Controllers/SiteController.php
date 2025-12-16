@@ -126,11 +126,6 @@ class   SiteController extends Controller
 
 
 
-
-
-
-
-
     public function products()
    {
        $products = Product::where('status', 'published')
