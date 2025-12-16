@@ -205,7 +205,7 @@ class PaymentController extends Controller
         $order = Order::where('transaction_id',$orderId)->first();
 
 
-        if($order->status == 'Canceled') {
+        if($order->status != 'Canceled') {
             $qrCode = $this->generateQrCode(\url('/payment/check/' . $orderId));
             return view('success',compact('order','qrCode'));
         }
