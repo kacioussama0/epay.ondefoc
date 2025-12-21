@@ -135,10 +135,13 @@ class PaymentController extends Controller
         $result = $this->satim->confirmOrder($orderId);
 
 
+
         if(!empty($result)) {
 
 
             $order = Order::where('transaction_id',$orderId)->first();
+
+            $product = $order->product;
 
             $request->session()->put('tId', $orderId);
 
@@ -152,6 +155,10 @@ class PaymentController extends Controller
                     $order->ip = $result['Ip'];
                     $order->authorization_number = $result['approvalCode'];
                     $order->description = $result['params']['respCode_desc'];
+
+                    if(isset($product->stock) and $product->stock > 0) {
+                        $product->update(['stock' => $product->stock - 1]);
+                    }
 
                     if($order->save()) {
                         return redirect()->to('/payment/result')->send();
@@ -172,6 +179,10 @@ class PaymentController extends Controller
                     $order->orderNumber = $result['OrderNumber'];
                     $order->ip = $userIP;
                     $order->description = $result['params']['respCode_desc'] ?? $result['actionCodeDescription'];
+
+                    if(isset($product->stock) and $product->stock > 0) {
+                        $product->update(['stock' => $product->stock - 1]);
+                    }
 
                 }
 

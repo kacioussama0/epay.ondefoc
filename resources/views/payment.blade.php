@@ -56,7 +56,7 @@
             "description": "{{$product->description}}",
             "brand": {
                 "@type": "Brand",
-                "name": "Ondefoc"
+                "name": "ONDEFOC"
             },
             "offers": {
                 "@type": "Offer",
@@ -97,7 +97,7 @@
     </section>
 
     <hr>
-    @if(empty($product->stock) || $product->stock > 0)
+    @if(($product->stock > 0) || $product->stock == "")
         <section class="payment-content">
 
         <div class="container">

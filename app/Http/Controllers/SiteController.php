@@ -130,11 +130,12 @@ class   SiteController extends Controller
    {
        $products = Product::where('status', 'published')
            ->orderByRaw('
-        CASE
-            WHEN stock = 0 THEN 3        -- out of stock → دائماً في الأخير
-            WHEN stock IS NULL THEN 2    -- null → يأتي بعد القيم >0
-            ELSE 1                       -- stock > 0 → في الأعلى
-        END
+               CASE
+                    WHEN stock = 0 THEN 4
+                    WHEN stock IS NULL THEN 3
+                    WHEN stock > 0 THEN 1
+                    ELSE 2
+                END
     ')
            ->orderBy('stock', 'DESC')
            ->orderBy('created_at', 'DESC')

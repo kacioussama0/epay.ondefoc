@@ -13,7 +13,7 @@
         <div class="container my-5 py-5">
 
 
-            <img src="{{asset('images/logo-o-colored.svg')}}" id="logo-print" class="d-none mx-auto mb-5" alt="logo-ondefoc" height="100">
+            <img src="https://ondefoc.dz/wp-content/uploads/2023/10/LOGO-ONDEFOC-1-1.png.webp" id="logo-print" class="d-none mx-auto mb-5" alt="logo-ondefoc" height="100">
 
 
 

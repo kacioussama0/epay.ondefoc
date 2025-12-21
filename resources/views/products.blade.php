@@ -88,12 +88,50 @@
 
     </script>
 
+    <script>
+
+        // const searchInput = document.querySelector('.search-input');
+        // const productContainer = document.querySelector('.products');
+        // const products = document.querySelectorAll('.products-item');
+        //
+        //
+        // function filterProductByName(productName,searched) {
+        //     return productName.includes(searched);
+        // }
+        //
+        //
+        // searchInput.oninput = function (e) {
+        //
+        //     iso.destroy()
+        //
+        //     let textValue = e.target.value;
+        //
+        //     const filtred = [];
+        //
+        //     products.forEach((product) => {
+        //         const title = product.querySelector('h4').textContent;
+        //         if(filterProductByName(title,textValue)) {
+        //             const prod = product
+        //             prod.style = null
+        //             filtred.push(prod.outerHTML)
+        //         }
+        //     })
+        //
+        //
+        //     productContainer.innerHTML = filtred
+        //
+        //
+        //
+        // }
+
+    </script>
+
 
 @endsection
 
 @section('content')
 
-    <x-page-title>المنتجات</x-page-title>
+    <x-page-title>الدفع الإلكتروني</x-page-title>
 
     <section class="products-content my-5">
 
@@ -133,7 +171,7 @@
 
 
             <div class="row gy-5 g-md-5 products">
-{{--                style="filter: grayscale({{isset($product->stock) && $product->stock == 0 ? 1 : 0}})"--}}
+
                 @foreach($products as $product)
 
                     <div class="col-md-6 col-lg-4  products-item category-{{$product->category->id}}">
@@ -142,16 +180,16 @@
 
 
                                 @if($product->sale_price and ($product->reduction_rate < 100 and $product->reduction_rate > 0))
-                                    <span class="badge text-bg-danger position-absolute end-0 top-0 rounded-pill mt-3 me-3" dir="ltr">- {{$product->reduction_rate}} %</span>
+                                    <span class="badge text-bg-danger position-absolute end-0 top-0 rounded-pill mt-3 me-3 z-3" dir="ltr">- {{$product->reduction_rate}} %</span>
                                 @endif
-                                <img src="{{$product->image ? asset('storage/' . $product->image) : asset('images/logo-colored.svg')}}" alt="logo" class="object-fit-cover w-100 bg-primary-subtle" height="250">
+                                <img src="{{$product->image ? asset('storage/' . $product->image) : asset('images/logo-colored.svg')}}" alt="logo" class="object-fit-cover w-100 bg-primary-subtle" height="250" style="filter: grayscale({{isset($product->stock) && $product->stock == 0 ? 1 : 0}})">
 
                             </div>
                             <div class="card-body p-4">
 
 
                                 <h4 class="fw-bolder text-truncate">{{$product->name}}</h4>
-                                <h6 class="card-subtitle mb-2 badge bg-dark me-auto d-inline-block">{{$product->category->name}}</h6>
+                                <h6 class="card-subtitle mb-2 badge bg-primary me-auto d-inline-block">{{$product->category->name}}</h6>
 
                                 <p class="card-text text-secondary truncate-2-lines" style="min-height: 48px">{{$product->description}}</p>
 
@@ -169,9 +207,19 @@
 
                             <div class="card-footer pb-3 bg-transparent border-0 d-flex justify-content-between align-items-center">
 
-                                <a href="{{url('/products/' . $product->slug)}}" style="width: 40px;height: 40px" class="stretched-link text-decoration-none btn rounded-circle p-2 d-inline-flex justify-content-center align-items-center btn-primary">
-                                    <i class="bi bi-bag"></i>
-                                </a>
+                                @if(isset($product->stock) && $product->stock == 0)
+                                    <a href="#" style="width: 40px;height: 40px" class="stretched-link text-decoration-none btn rounded-circle p-2 d-inline-flex justify-content-center align-items-center btn-dark">
+                                        <i class="bi bi-bag"></i>
+                                    </a>
+
+                                @else
+
+
+                                    <a href="{{url('/products/' . $product->slug)}}" style="width: 40px;height: 40px" class="stretched-link text-decoration-none btn rounded-circle p-2 d-inline-flex justify-content-center align-items-center btn-primary">
+                                        <i class="bi bi-bag"></i>
+                                    </a>
+
+                                @endif
 
                                 @if(!isset($product->stock))
                                     <span class="text-bg-success rounded-5 p-2 f fw-bolder">

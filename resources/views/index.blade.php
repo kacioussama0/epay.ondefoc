@@ -1,7 +1,7 @@
 @extends('template.app')
 
 
-@section('title','الدفع الإلكتروني')
+@section('title','الرئيسية')
 
 
 @section('styles')
@@ -53,7 +53,7 @@
 
 
             <h3 class="display-4 fw-bold text-center mb-4" data-aos="fade-up"  data-aos-duration="800">قم بإجراء مدفوعاتك على موقعنا بسهولة وأمان.</h3>
-            <h5 class="text-center fw-light mb-5" data-aos="fade-up" data-aos-duration="800">لا ترغب في التنقل لدفع مستحقات الدورات أو الشهادات ؟ اكتشف هنا جميع الخطوات التي يجب اتباعها لإجراء المدفوعات عبر الإنترنت باستخدام بطاقة CIB أو الذهبية لبريد الجزائر.</h5>
+            <h5 class="text-center fw-light mb-5" data-aos="fade-up" data-aos-duration="800">لا ترغب في التنقل لدفع مستحقات الخدمات ؟ اكتشف هنا جميع الخطوات التي يجب اتباعها لإجراء المدفوعات عبر الإنترنت باستخدام بطاقة CIB أو البطاقة الذهبية لبريد الجزائر.</h5>
 
 
             <div class="row">

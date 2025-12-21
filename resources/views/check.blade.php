@@ -12,7 +12,7 @@
 
         <div class="container my-5 py-5">
 
-                        <div class="card shadow border-0 my-5 p-md-5">
+                        <div class="card rounded-5 overflow-hidden shadow-sm border-primary border-1 my-5 py-5" >
 
                             <div class="card-header bg-transparent border-0">
 
@@ -22,7 +22,7 @@
                                     <x-failed-mark/>
                                 @endif
 
-                                <h1 class="fw-bolder @if($status) text-success  @else text-danger @endif my-5 display-2 d-flex justify-content-center align-items-center">{{$status ? 'المعاملة صالحة' : 'عذرًا، الدفع غير صالح'}}</h1>
+                                <h1 class="fw-bolder @if($status) text-success  @else text-danger @endif my-5 display-3 text-center d-flex justify-content-center align-items-center">{{$status ? 'المعاملة صالحة' : 'عذرًا، الدفع غير صالح'}}</h1>
 
                             </div>
 

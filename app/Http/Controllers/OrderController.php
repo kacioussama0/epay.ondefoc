@@ -52,24 +52,29 @@ class OrderController extends Controller
 
         if(empty($order)) abort(404);
 
-        $data = [
-            'transaction_id' => $order->transaction_id,
-            'order_id' => $order->orderNumber,
-            'auth' => $order->authorization_number,
-            'amount' => $order->amount,
-            'tax_rate' => $order->product->tax_rate,
-            'total_amount' => $order->product->total_amount,
-            'tva' => $order->product->tax_rate,
-            'sale_amount' => $order->product->sale_price ? number_format( $order->product->sale_price,2,'.','') : number_format( $order->product->price,2,'.',''),
-            'name' => $order->customer_name,
-            'product_sku' => $order->product->sku,
-            'status' => $order->status,
-            'date' => $order->created_at->format('Y-m-d H:i:s'),
-            'qrCode' => $qrCode
-        ];
-        Mail::to($order->email)->send(new ReceiptMail($data));
+            $data = [
+                'transaction_id' => $order->transaction_id,
+                'order_id' => $order->orderNumber,
+                'auth' => $order->authorization_number,
+                'amount' => $order->amount,
+                'tax_rate' => $order->product->tax_rate,
+                'total_amount' => $order->amount,
+                'tva' => $order->product->tax_rate,
+                'sale_amount' => $order->product->sale_price ? number_format( $order->product->sale_price,2,'.','') : number_format( $order->product->price,2,'.',''),
+                'name' => $order->customer_name,
+                'product_sku' => $order->product->sku,
+                'status' => $order->status,
+                'date' => $order->created_at->format('Y-m-d H:i:s'),
+                'qrCode' => $qrCode,
+            ];
 
-        return redirect()->to('/payment/success')->with('success', 'تم إرسال الوصل إلى بريدك الإلكتروني بنجاح');
+            $receiptUrl = $this->generateReceipt($data);
+
+            $data['receipt_url'] = $receiptUrl;
+
+            Mail::to($order->email)->send(new ReceiptMail($data));
+
+            return redirect()->to('/payment/result')->with('success', 'تم إرسال الوصل إلى بريدك الإلكتروني بنجاح');
 
     }
 
@@ -129,9 +134,16 @@ class OrderController extends Controller
         ];
 
 
-        $pdf = Pdf::loadView('receipt', $data);
-        return $pdf->stream('receipt-' . $order->orderNumber . '.pdf');
+            $path = storage_path('app/public/temp/receipt-' . $order->orderNumber . '.pdf');
 
+            if (!file_exists(dirname($path))) {
+                mkdir(dirname($path), 0755, true);
+            }
+
+            $pdf = Pdf::loadView('receipt', $data);
+            $pdf->save($path);
+
+            return url('storage/public/temp/' . $order->orderNumber . '.pdf');
     }
 
 

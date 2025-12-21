@@ -2,10 +2,12 @@
 
 namespace App\Mail;
 
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PaymentController;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Attachment;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
@@ -14,44 +16,33 @@ class ReceiptMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $data;
+    public array $data;
 
-    public function __construct($data)
+    public function __construct(array $data)
     {
         $this->data = $data;
     }
 
-    public function build() {
-
-        $pdf = Pdf::loadView('receipt', $this->data);
-
-        $data = $this->data;
-
-        return $this->view('emails.receipt', compact( 'data'))
-            ->attachData($pdf->output(), 'receipt.pdf', [
-                'mime' => 'application/pdf',
-            ]);
-    }
-
-    /**
-     * Get the message envelope.
-     */
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'وصل الدفع Ondefoc',
+            subject: 'وصل الدفع ONDEFOC',
         );
     }
 
+    public function content(): Content
+    {
+        return new Content(
+            view: 'emails.receipt',
+            with: [
+                'data' => $this->data,
+            ],
+        );
+    }
 
-
-    /**
-     * Get the attachments for the message.
-     *
-     * @return array<int, \Illuminate\Mail\Mailables\Attachment>
-     */
     public function attachments(): array
     {
+
         return [];
     }
 }

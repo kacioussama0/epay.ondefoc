@@ -12,7 +12,7 @@
         transition: .7s;
     }
 
-    svg {
+    .logo-loader {
         width: 300px;
     }
 
@@ -36,7 +36,7 @@
 
 <div class="loader d-flex flex-column gap-5">
 
-   <x-logo/>
+    <img src="{{asset('/images/logo.svg')}}" alt="Logo Ondefoc" class="logo-loader" />
 
     <div class="spinner-border text-light" role="status">
         <span class="visually-hidden">Loading...</span>
