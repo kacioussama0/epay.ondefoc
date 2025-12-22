@@ -174,15 +174,19 @@ class PaymentController extends Controller
                     $order->description = "تم رفض معاملتك";
 
 
+
                 }else {
                     $order->status = 'Canceled';
                     $order->orderNumber = $result['OrderNumber'];
                     $order->ip = $userIP;
                     $order->description = $result['params']['respCode_desc'] ?? $result['actionCodeDescription'];
 
+                    OrderController::sendMailReceipt($order->id);
+
                     if(isset($product->stock) and $product->stock > 0) {
                         $product->update(['stock' => $product->stock - 1]);
                     }
+
 
                 }
 
@@ -217,7 +221,7 @@ class PaymentController extends Controller
         $order = Order::where('transaction_id',$orderId)->first();
 
 
-        if($order->status != 'Canceled') {
+        if($order->status == 'Canceled') {
             $qrCode = $this->generateQrCode(\url('/payment/check/' . $orderId));
             return view('success',compact('order','qrCode'));
         }

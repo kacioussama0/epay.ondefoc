@@ -137,7 +137,7 @@ class   SiteController extends Controller
                     ELSE 2
                 END
     ')
-           ->orderBy('stock', 'DESC')
+
            ->orderBy('created_at', 'DESC')
            ->get();
 

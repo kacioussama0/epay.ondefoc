@@ -80,12 +80,12 @@
             <div class="row my-5 g-md-5 gy-5 align-items-center text-md-start text-center">
 
 
-                <div class="col-md-6">
+                <div class="col-xl-6">
                     <h2 class="mb-5 fw-bolder">{{$product->name}}</h2>
                     <p>{!!  nl2br($product->description)!!}</p>
                 </div>
 
-                <div class="col-md-6">
+                <div class="col-xl-6">
                     <img src="{{$product->image ? asset('storage/' . $product->image) : asset('images/logo-colored.svg')}}" alt="product-{{$product->slug}}" class="object-fit-contain rounded-5 w-100">
                 </div>
 
@@ -105,11 +105,11 @@
 
                 <div class="row g-md-5 justify-content-center align-items-center">
 
-                    <div class="col-lg-6   order-lg-1 order-0 text-center">
+                    <div class="col-xl-6 d-none d-xl-block   order-lg-1 order-0 text-center">
                         <img src="{{asset('images/Cartes_paiments.png')}}" alt="illustration payment" class="img-fluid">
                     </div>
 
-                    <div class="col-lg-6  py-5">
+                    <div class="col-xl-6  py-5">
 
 
                         <div class="card rounded-5 overflow-hidden shadow-sm border-primary border-1">

@@ -174,7 +174,7 @@
 
                 @foreach($products as $product)
 
-                    <div class="col-md-6 col-lg-4  products-item category-{{$product->category->id}}">
+                    <div class="col-md-6 col-xl-4  products-item category-{{$product->category->id}}">
                         <div class="card rounded-5 overflow-hidden shadow-sm border-primary border-1 ">
                             <div class="card-header border-primary p-0 position-relative">
 

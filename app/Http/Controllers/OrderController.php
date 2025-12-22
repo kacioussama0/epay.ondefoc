@@ -45,37 +45,47 @@ class OrderController extends Controller
 
 
 
-    public function sendReceipt($orderId) {
+    public  function sendReceipt($orderId) {
 
+        if(self::sendMailReciept($orderId)) {
+            return redirect()->to('/payment/result')->with('success', 'تم إرسال الوصل إلى بريدك الإلكتروني بنجاح');
+        }
+
+        abort(500);
+
+    }
+
+    public static function sendMailReceipt($orderId)
+    {
         $order = Order::where('transaction_id',$orderId)->first();
         $qrCode = PaymentController::generateQrCode(url('/payment/check/' . $order->transaction_id));
 
         if(empty($order)) abort(404);
 
-            $data = [
-                'transaction_id' => $order->transaction_id,
-                'order_id' => $order->orderNumber,
-                'auth' => $order->authorization_number,
-                'amount' => $order->amount,
-                'tax_rate' => $order->product->tax_rate,
-                'total_amount' => $order->amount,
-                'tva' => $order->product->tax_rate,
-                'sale_amount' => $order->product->sale_price ? number_format( $order->product->sale_price,2,'.','') : number_format( $order->product->price,2,'.',''),
-                'name' => $order->customer_name,
-                'product_sku' => $order->product->sku,
-                'status' => $order->status,
-                'date' => $order->created_at->format('Y-m-d H:i:s'),
-                'qrCode' => $qrCode,
-            ];
+        $data = [
+            'transaction_id' => $order->transaction_id,
+            'order_id' => $order->orderNumber,
+            'auth' => $order->authorization_number,
+            'amount' => $order->amount,
+            'tax_rate' => $order->product->tax_rate,
+            'total_amount' => $order->amount,
+            'tva' => $order->product->tax_rate,
+            'sale_amount' => $order->product->sale_price ? number_format( $order->product->sale_price,2,'.','') : number_format( $order->product->price,2,'.',''),
+            'name' => $order->customer_name,
+            'product_sku' => $order->product->sku,
+            'status' => $order->status,
+            'date' => $order->created_at->format('Y-m-d H:i:s'),
+            'qrCode' => $qrCode,
+        ];
 
-            $receiptUrl = $this->generateReceipt($data);
+        $receiptUrl = Self::generateReceipt($data);
 
-            $data['receipt_url'] = $receiptUrl;
+        $data['receipt_url'] = $receiptUrl;
 
-            Mail::to($order->email)->send(new ReceiptMail($data));
-
-            return redirect()->to('/payment/result')->with('success', 'تم إرسال الوصل إلى بريدك الإلكتروني بنجاح');
-
+        if(Mail::to($order->email)->send(new ReceiptMail($data))) {
+            return true;
+        }
+        return false;
     }
 
 

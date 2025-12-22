@@ -3,7 +3,24 @@ body {
 }
 
 
+::selection {
+    background: var(--bs-primary);
+    color: #FFFFFF;
+}
 
+::-webkit-scrollbar {
+    width: 15px;
+}
+::-webkit-scrollbar-track {
+    background-color: var(--bs-secondary);
+    box-shadow: 0 0 10px var(--bs-dark) inset;
+}
+::-webkit-scrollbar-thumb {
+    background-color: rgb(109 26 61 / 50%);
+}
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--bs-primary);
+}
 
 header {
     backdrop-filter: blur(20px);
